@@ -166,6 +166,7 @@ tasks {
     failOnWarning = true
   }
   javadoc { isFailOnError = false }
+  test { useJUnitPlatform() }
 }
 
 // Note: Code quality plugins (dokka, detekt, spotless) were removed
