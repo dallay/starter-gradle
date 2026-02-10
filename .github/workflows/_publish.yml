@@ -11,13 +11,13 @@ on:
         type: boolean
         default: false
     secrets:
-      signingInMemoryKey:
+      SIGNING_IN_MEMORY_KEY:
         required: true
-      signingInMemoryKeyPassword:
+      SIGNING_IN_MEMORY_KEY_PASSWORD:
         required: true
-      mavenCentralUsername:
+      MAVEN_CENTRAL_USERNAME:
         required: true
-      mavenCentralPassword:
+      MAVEN_CENTRAL_PASSWORD:
         required: true
 
 jobs:
@@ -76,11 +76,11 @@ jobs:
 
       - name: 👻 Publish to Maven Central
         env:
-          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.signingInMemoryKey }}
-          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.signingInMemoryKeyPassword }}
+          ORG_GRADLE_PROJECT_signingInMemoryKey: ${{ secrets.SIGNING_IN_MEMORY_KEY }}
+          ORG_GRADLE_PROJECT_signingInMemoryKeyPassword: ${{ secrets.SIGNING_IN_MEMORY_KEY_PASSWORD }}
           # ⚠️ Warning: Do not use never-expiring User Token!!!
-          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.mavenCentralUsername }}
-          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.mavenCentralPassword }}
+          ORG_GRADLE_PROJECT_mavenCentralUsername: ${{ secrets.MAVEN_CENTRAL_USERNAME }}
+          ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
         run: |
           if [ "${GITHUB_REPOSITORY}" = "dallay/starter-gradle" ]; then
             ./gradlew :build-logic:publishToMavenCentral publishToMavenCentral
