@@ -15,6 +15,6 @@ public class JavaApp {
   /// main function
   @SuppressWarnings("SystemOut")
   void main() {
-    IO.println(new JavaApp().sayHello());
+    System.out.println(new JavaApp().sayHello());
   }
 }
