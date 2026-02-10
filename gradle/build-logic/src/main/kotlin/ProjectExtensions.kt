@@ -1,8 +1,8 @@
 @file:Suppress("PackageDirectoryMismatch", "UnstableApiUsage")
 
-package io.github.mymx2.plugin
+package com.profiletailors.plugin
 
-import io.github.mymx2.plugin.gradle.ExecValueSource
+import com.profiletailors.plugin.gradle.ExecValueSource
 import java.io.File
 import javax.inject.Inject
 import kotlin.jvm.optionals.getOrNull
@@ -276,7 +276,7 @@ object GradleExtTool {
 
   fun openBrowser(providers: ProviderFactory, url: String) {
     try {
-      //    // 使用 Java AWT 的跨平台解决方案
+      //    // Use Java AWT cross-platform solution
       //    if (Desktop.isDesktopSupported() &&
       // Desktop.getDesktop().isSupported(Desktop.Action.BROWSE)) {
       //      Desktop.getDesktop().browse(URI(url))

@@ -1,14 +1,19 @@
 @file:Suppress("UnstableApiUsage", "detekt:MaxLineLength")
 
-import io.github.mymx2.plugin.resetTaskGroup
 import org.gradle.kotlin.dsl.support.uppercaseFirstChar
 
 plugins {
   `kotlin-dsl` // https://plugins.gradle.org/plugin/org.gradle.kotlin.kotlin-dsl
   alias(libs.plugins.com.gradle.plugin.publish)
-  id("io.github.mymx2.module.kotlin")
-  id("io.github.mymx2.feature.publish-vanniktech")
+  kotlin("jvm") version embeddedKotlinVersion
+  `maven-publish`
+  signing
+  alias(libs.plugins.com.vanniktech.maven.publish)
 }
+
+java { toolchain { languageVersion.set(JavaLanguageVersion.of(libs.versions.jdk.get())) } }
+
+tasks.withType<JavaCompile> { options.release.set(libs.versions.jdk.get().toInt()) }
 
 description = "Zero-config Gradle plugin for building production-ready standalone JVM apps"
 
@@ -78,7 +83,7 @@ gradlePlugin {
   website = pomUrl
   vcsUrl = pomScmConnection
   // Relying on Gradle script to generate plugins is slowing out the build:
-  // 使用 gradle.kts 方式生成插件会很慢:
+  // Generating plugins using gradle.kts is very slow:
   // https://github.com/android/nowinandroid/issues/39
   // https://github.com/gradle/gradle/issues/15886
   plugins {
@@ -107,6 +112,28 @@ gradlePlugin {
           }
         }
       }
+    // Manual registration for class-based plugins
+    register("exampleSettingsPlugin") {
+      id = "com.profiletailors.plugin.example.settings"
+      implementationClass = "com.profiletailors.plugin.ExampleSettingsPlugin"
+      displayName = "ExampleSettingsPlugin"
+      description = "Example settings plugin"
+      tags.set(listOf("example", "settings"))
+    }
+    register("exampleProjectPlugin") {
+      id = "com.profiletailors.plugin.example.project"
+      implementationClass = "com.profiletailors.plugin.ExampleProjectPlugin"
+      displayName = "ExampleProjectPlugin"
+      description = "Example project plugin"
+      tags.set(listOf("example", "project"))
+    }
+    register("exampleAwarePlugin") {
+      id = "com.profiletailors.plugin.example.aware"
+      implementationClass = "com.profiletailors.plugin.ExampleAwarePlugin"
+      displayName = "ExampleAwarePlugin"
+      description = "Example aware plugin"
+      tags.set(listOf("example", "aware"))
+    }
   }
   val printPlugins = false
   if (printPlugins) println("|----------publish plugins----------")
@@ -131,7 +158,7 @@ buildscript {
   }
 }
 
-listOf(".*PluginMarker.*".toRegex() to "others").forEach { resetTaskGroup(it.first, it.second) }
+// Plugin marker tasks are grouped automatically
 
 tasks {
   validatePlugins {
@@ -139,21 +166,22 @@ tasks {
     failOnWarning = true
   }
   javadoc { isFailOnError = false }
+  test { useJUnitPlatform() }
 }
 
-// 禁用 dokka
-dokka { dokkaSourceSets { configureEach { suppress = true } } }
-
-// detekt
-detekt { config.setFrom(rootDir.toPath().parent.resolve("configs/detekt/detekt.yml").toFile()) }
-
-// 禁用 spotlessKotlin
-gradle.projectsEvaluated {
-  tasks.named { it.startsWith("spotlessKotlin") }.configureEach { enabled = false }
-}
+// Note: Code quality plugins (dokka, detekt, spotless) were removed
+// because this build-logic project must be self-contained and cannot
+// use convention plugins defined within itself.
 
 // TODO remove it
 configurations.configureEach { resolutionStrategy { force("org.projectlombok:lombok:1.18.42") } }
+
+dependencies {
+  testImplementation("org.jetbrains.kotlin:kotlin-test")
+  testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
+  testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.0")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
+}
 
 dependencies {
   implementation("org.jetbrains.kotlinx:kotlinx-coroutines-bom:1.8.0")
