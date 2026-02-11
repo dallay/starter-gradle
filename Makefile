@@ -71,7 +71,12 @@ setup: check-tools ## Initial project setup (chmod +x gradlew)
 	@echo "🔧 Setting up project..."
 	@chmod +x gradlew
 	@git update-index --chmod=+x gradlew
+	@$(GRADLEW) agentsyncApply || true
 	@echo "✅ Project setup complete"
+
+sync-agents: check-tools ## Synchronize AI agent configurations (agentsync)
+	@echo "🤖 Synchronizing AI agents..."
+	@$(GRADLEW) agentsyncApply
 
 wrapper: ## Update Gradle wrapper
 	@$(GRADLEW) wrapper --gradle-version $(shell grep -E '^gradle\s*=' gradle/libs.versions.toml | sed 's/.*= "\(.*\)".*/\1/')
