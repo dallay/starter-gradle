@@ -154,3 +154,23 @@ Servers/
 
 # ------------------------------------------------------------------------------
 # END OF IGNORE
+# START AI Agent Symlinks
+.claude/commands/
+.claude/skills/
+.codex/config.toml
+.codex/instructions.md
+.codex/skills
+.cursor/mcp.json
+.cursor/skills/
+.gemini/commands/
+.gemini/settings.json
+.gemini/skills/
+.github/copilot-instructions.md
+.mcp.json
+.vscode/mcp.json
+AGENTS.md
+CLAUDE.md
+GEMINI.md
+OPENCODE.md
+opencode.json
+# END AI Agent Symlinks
