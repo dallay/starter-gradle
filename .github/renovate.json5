@@ -10,7 +10,7 @@
   semanticCommitType: "deps",
   semanticCommitScope: "",
   labels: ["type|dependency-upgrade", "pr|deps"],
-  ignorePaths: ["**/__tests__/**", "docs/**"],
+  ignorePaths: ["**/__tests__/**", "docs/**", "!docs/website/**"],
   pinDigests: true,
   ignoreUnstable: false,
   minimumReleaseAge: "7 days",
@@ -27,6 +27,11 @@
     {
       matchFileNames: ["**/alphaLibs.versions.toml"],
       allowedVersions: "!/(-snapshot|-Snapshot|-SNAPSHOT)/",
+    },
+    {
+      matchManagers: ["npm", "pnpm"],
+      matchFileNames: ["docs/website/**"],
+      lockFileMaintenance: { enabled: true },
     },
   ],
   customManagers: [
