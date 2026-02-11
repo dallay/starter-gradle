@@ -28,6 +28,8 @@ gradle.lifecycle.beforeProject {
     apply(plugin = "com.profiletailors.check.actionlint-root")
     // dependency check
     apply(plugin = "com.profiletailors.check.dependencies-root")
+    // agentsync
+    apply(plugin = "com.profiletailors.tools.agentsync")
   }
 }
 
