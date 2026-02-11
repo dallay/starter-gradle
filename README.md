@@ -90,17 +90,17 @@ make check             # Run all checks (format, lint, tests)
 
 #### Quick Reference
 
-| Command | Description |
-|---------|-------------|
-| `make run` | Run the main application (app module) |
-| `make build` | Build the entire project |
-| `make build-fast` | Build without tests (faster) |
-| `make test` | Run all tests |
-| `make test-coverage` | Run tests with coverage report |
-| `make format` | Format all code (Spotless) |
-| `make check` | Run all checks (format + lint + tests) |
-| `make clean` | Clean build artifacts |
-| `make deps` | Show project dependencies |
+| Command              | Description                            |
+| -------------------- | -------------------------------------- |
+| `make run`           | Run the main application (app module)  |
+| `make build`         | Build the entire project               |
+| `make build-fast`    | Build without tests (faster)           |
+| `make test`          | Run all tests                          |
+| `make test-coverage` | Run tests with coverage report         |
+| `make format`        | Format all code (Spotless)             |
+| `make check`         | Run all checks (format + lint + tests) |
+| `make clean`         | Clean build artifacts                  |
+| `make deps`          | Show project dependencies              |
 
 #### Examples
 
