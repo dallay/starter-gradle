@@ -3,15 +3,14 @@
 import com.autonomousapps.tasks.ProjectHealthTask
 import com.profiletailors.plugin.InternalDependencies
 import com.profiletailors.plugin.libs
+import gradle.kotlin.dsl.accessors._2e1eabce6886db90cafe9a120e6529b7.testing
 import io.fuchs.gradle.collisiondetector.DetectCollisionsTask
 import org.gradle.api.Project
 import org.gradle.api.artifacts.Dependency
 import org.gradle.api.artifacts.dsl.DependencyHandler
 import org.gradle.api.plugins.jvm.JvmTestSuite
-import org.gradle.kotlin.dsl.getByType
 import org.gradle.kotlin.dsl.invoke
 import org.gradle.kotlin.dsl.withType
-import org.gradle.testing.base.TestingExtension
 
 object PluginHelpers {
 
@@ -44,7 +43,7 @@ object PluginHelpers {
    * ```
    */
   fun Project.useJUnitJupiterM2(junitBomVersion: String = "", assertjBomVersion: String = "") {
-    extensions.getByType<TestingExtension>().suites.withType<JvmTestSuite> {
+    testing.suites.withType<JvmTestSuite> {
       dependencies {
         implementation(
           platform(

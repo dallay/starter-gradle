@@ -97,7 +97,6 @@ make check             # Run all checks (format, lint, tests)
 | `make build-fast`    | Build without tests (faster)           |
 | `make test`          | Run all tests                          |
 | `make test-coverage` | Run tests with coverage report         |
-| `make test-mutation` | Run mutation tests (PIT) for app       |
 | `make format`        | Format all code (Spotless)             |
 | `make check`         | Run all checks (format + lint + tests) |
 | `make clean`         | Clean build artifacts                  |
@@ -128,7 +127,6 @@ Gradle [command-line usage help](https://docs.gradle.org/current/userguide/comma
 ./gradlew build                   # Build project
 ./gradlew app:run                 # Run app module
 ./gradlew test                    # Run tests
-./gradlew app:pitest              # Run mutation tests (PIT)
 ./gradlew check                   # Run all checks
 ```
 
