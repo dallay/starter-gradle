@@ -1,6 +1,6 @@
 @file:Suppress("UnstableApiUsage")
 
-rootProject.name = "dy-gradle-plugin"
+rootProject.name = "profiletailors-build-logic"
 
 run {
   enableFeaturePreview("TYPESAFE_PROJECT_ACCESSORS")

@@ -1,5 +1,5 @@
-[![maven-central-version](https://img.shields.io/maven-central/v/com.profiletailors/dy-gradle-plugin?strategy=latestProperty)](https://central.sonatype.com/artifact/com.profiletailors/dy-gradle-plugin)
-[![maven-metadata-url](https://img.shields.io/maven-metadata/v?label=snapshot&metadataUrl=https://central.sonatype.com/repository/maven-snapshots/io/github/dallay/dy-gradle-plugin/maven-metadata.xml&strategy=latestProperty)](https://central.sonatype.com/repository/maven-snapshots/io/github/dallay/dy-gradle-plugin/maven-metadata.xml)
+[![maven-central-version](https://img.shields.io/maven-central/v/com.profiletailors/profiletailors-gradle-plugin?strategy=latestProperty)](https://central.sonatype.com/artifact/com.profiletailors/profiletailors-gradle-plugin)
+[![maven-metadata-url](https://img.shields.io/maven-metadata/v?label=snapshot&metadataUrl=https://central.sonatype.com/repository/maven-snapshots/io/github/dallay/profiletailors-gradle-plugin/maven-metadata.xml&strategy=latestProperty)](https://central.sonatype.com/repository/maven-snapshots/io/github/dallay/profiletailors-gradle-plugin/maven-metadata.xml)
 [![git-hub-release](https://img.shields.io/github/v/release/dallay/starter-gradle)](https://github.com/dallay/starter-gradle/releases)
 
 [![codacy-grade](https://img.shields.io/codacy/grade/64109c17cc5c4ea090db54cb773621fe)](https://app.codacy.com/gh/dallay/starter-gradle/dashboard)
