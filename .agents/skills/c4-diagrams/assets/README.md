@@ -1,16 +1,22 @@
 # c4-diagrams assets
 
-Cómo renderizar los ejemplos:
+How to render the examples:
 
 - Mermaid (mmdc):
 
+  ```bash
+  # From the repository root
   mmdc -i assets/mermaid-example.mmd -o /tmp/mermaid.png
+  ```
 
 - PlantUML (plantuml):
 
+  ```bash
+  # From the repository root
   plantuml -tpng assets/plantuml-example.puml
+  ```
 
-Recomendaciones:
+Recommendations:
 
-- Instala mmdc (mermaid-cli) y plantuml localmente si vas a renderizar.
-- Para PlantUML, utiliza la librería C4-PlantUML (`https://github.com/plantuml-stdlib/C4-PlantUML`).
+- Install mmdc (mermaid-cli) and plantuml locally if you want to render diagrams.
+- For PlantUML, use the C4-PlantUML library (`https://github.com/plantuml-stdlib/C4-PlantUML`).

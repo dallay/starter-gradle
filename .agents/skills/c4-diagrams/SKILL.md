@@ -1,8 +1,7 @@
 ---
 name: c4-diagrams
 description: >
-  Genera y mantiene actualizados los modelos C4 dentro de docs/architecture/diagrams.
-  Trigger: archivos en docs/architecture/diagrams, cambios en diagramas .mmd/.puml/.puml.md
+  Generates and keeps C4 models in docs/architecture/diagrams up to date. Trigger: files in docs/architecture/diagrams, changes to .mmd/.puml/.puml.md diagrams
 license: Apache-2.0
 metadata:
   author: cvix-team
