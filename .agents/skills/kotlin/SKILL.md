@@ -6,7 +6,7 @@ description: >
 license: Apache-2.0
 allowed-tools: Read, Edit, Write, Glob, Grep, Bash
 metadata:
-  author: cvix
+  author: @dallay
   version: "1.0"
 ---
 
@@ -119,7 +119,7 @@ fun update(@RequestBody req: Request)
 
 ```kotlin
 /**
- * Processes a [com.cvix.resume.domain.Resume].
+ * Processes a [com.example.project.domain.Entity].
  */
 ```
 
@@ -360,7 +360,7 @@ logger.info { "User logged in: password=${user.password}" }  // WRONG!
 ./gradlew test
 
 # Run specific test class
-./gradlew test --tests "com.cvix.user.UserServiceTest"
+./gradlew test --tests "com.example.project.user.UserServiceTest"
 
 # Run tests by tag
 ./gradlew test -PincludeTags=unit
