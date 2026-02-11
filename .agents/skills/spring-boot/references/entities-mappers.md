@@ -174,7 +174,7 @@ class WaitlistEntryMapper(
         val email = try {
             Email(this.email)
         } catch (e: IllegalArgumentException) {
-            logger.error("Invalid email '{}' for entry {}", this.email, this.id)
+            logger.error("Invalid email for entry {}", this.id)
             throw DomainMappingException("Invalid email for entry ${this.id}", e)
         }
 
