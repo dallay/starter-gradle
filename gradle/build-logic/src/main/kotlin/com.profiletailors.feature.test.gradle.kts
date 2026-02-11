@@ -10,6 +10,8 @@ plugins {
   java
   // https://docs.gradle.org/nightly/userguide/jacoco_plugin.html
   jacoco
+  // Intentionally global in this convention: every JVM module gets a pitest task.
+  id("info.solidsoft.pitest")
 }
 
 val jepEnablePreview = project.getPropOrDefault(LocalConfig.Props.JEP_ENABLE_PREVIEW).toBoolean()
@@ -51,6 +53,24 @@ testing {
 
 if (junitJupiterM2Enabled) {
   useJUnitJupiterM2()
+}
+
+pitest {
+  targetClasses = setOf("${project.group}.*")
+  junit5PluginVersion = "1.2.2"
+  threads = 4
+  outputFormats = setOf("HTML", "XML")
+  timestampedReports = false
+  jvmArgs =
+    mutableListOf(
+        "-Dfile.encoding=${StandardCharsets.UTF_8.name()}",
+        "-XX:+EnableDynamicAgentLoading",
+      )
+      .also {
+        if (jepEnablePreview) {
+          it.add("--enable-preview")
+        }
+      }
 }
 
 configurations.testCompileOnly { extendsFrom(configurations.compileOnly.get()) }
