@@ -130,3 +130,11 @@ jobs:
 
       - name: 🧬 Run mutation tests (PIT)
         run: ./gradlew :app:pitest
+
+      - name: 📦 Upload PIT report
+        if: always()
+        uses: actions/upload-artifact@v4
+        with:
+          name: pitest-report-app
+          path: app/build/reports/pitest
+          if-no-files-found: warn

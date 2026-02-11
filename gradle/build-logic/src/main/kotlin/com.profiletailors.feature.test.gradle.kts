@@ -56,7 +56,7 @@ if (junitJupiterM2Enabled) {
 
 pitest {
   targetClasses = setOf("${project.group}.*")
-  junit5PluginVersion = "1.0.0"
+  junit5PluginVersion = "1.2.2"
   threads = 4
   outputFormats = setOf("HTML", "XML")
   timestampedReports = false
