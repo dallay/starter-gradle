@@ -40,7 +40,6 @@ val npm =
 object StarlightConfig {
   const val starlightDist = "dist"
   const val srcDocs = "src/content/docs"
-  const val distDir = starlightDist
 }
 
 "website"
@@ -58,7 +57,7 @@ object StarlightConfig {
       description = "Zips the website dist directory"
       archiveFileName = "dist.zip"
       destinationDirectory.set(isolated.projectDirectory.dir("build/distributions"))
-      from(isolated.projectDirectory.dir("${website}/${StarlightConfig.distDir}"))
+      from(isolated.projectDirectory.dir("${website}/${StarlightConfig.starlightDist}"))
       dependsOn(starlightdoc)
     }
   }

@@ -136,11 +136,6 @@ test-coverage: check-tools ## Run tests with coverage report (Kover)
 	@$(GRADLEW) koverHtmlReport
 	@echo "📊 Coverage report: $(APP_MODULE)/build/reports/kover/html/index.html"
 
-test-mutation: check-tools ## Run mutation tests (PIT) for app module
-	@echo "🧬 Running mutation tests (PIT) for app module..."
-	@$(GRADLEW) $(APP_MODULE):pitest
-	@echo "📊 Mutation report: $(APP_MODULE)/build/reports/pitest/index.html"
-
 test-verbose: check-tools ## Run tests with verbose output
 	@echo "🧪 Running tests (verbose)..."
 	@$(GRADLEW) test --info
@@ -243,7 +238,7 @@ quick: format build-fast ## Quick development cycle (format + build without test
 	@echo "✨ Quick build completed!"
 
 .PHONY: help check-tools setup wrapper build build-fast clean clean-all run dev \
-        run-java run-kotlin run-spring test test-app test-coverage test-mutation test-verbose \
+        run-java run-kotlin run-spring test test-app test-coverage test-verbose \
         format check-format lint-kotlin lint-java lint check docs docs-serve \
         deps deps-app deps-analysis deps-update tasks info version ci-build \
         ci-test ci-check all quick

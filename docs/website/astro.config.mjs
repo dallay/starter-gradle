@@ -2,6 +2,7 @@ import { defineConfig } from 'astro/config';
 import starlight from '@astrojs/starlight';
 
 export default defineConfig({
+	site: 'https://starter-gradle.dallay.com',
 	integrations: [
 		starlight({
 			title: 'Starter Gradle',
@@ -13,9 +14,24 @@ export default defineConfig({
 			sidebar: [
 				{
 					label: 'Guides',
+					translations: {
+						es: 'Guías',
+					},
 					items: [
-						{ label: 'Getting Started', slug: 'en/guides/getting-started' },
-						{ label: 'Project Structure', slug: 'en/guides/structure' },
+						{
+							label: 'Getting Started',
+							slug: 'guides/getting-started',
+							translations: {
+								es: 'Primeros Pasos',
+							},
+						},
+						{
+							label: 'Project Structure',
+							slug: 'guides/structure',
+							translations: {
+								es: 'Estructura del Proyecto',
+							},
+						},
 					],
 				},
 			],

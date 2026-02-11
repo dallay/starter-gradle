@@ -177,3 +177,6 @@ opencode.json
 docs/website/node_modules
 docs/website/dist
 docs/website/.astro
+docs/website/dist/
+docs/website/.astro/
+docs/website/node_modules/
