@@ -44,6 +44,7 @@ use of full commit SHAs instead of mutable tags.
 ## Commands
 
 1. **Resolve Tag to SHA (GitHub Actions Friendly)**:
+
    ```bash
    # Example: Resolve 'v2' tag for actions/checkout
    # This command ensures that for annotated tags, the commit SHA (peeled tag ^{}) is selected
@@ -52,11 +53,13 @@ use of full commit SHAs instead of mutable tags.
    ```
 
 2. **List all remote tags**:
+
    ```bash
    git ls-remote --tags https://github.com/owner/repo.git
    ```
 
 3. **Check for specific tag existence**:
+
    ```bash
    git ls-remote --tags https://github.com/owner/repo.git | rg "refs/tags/v1.2.3"
    ```

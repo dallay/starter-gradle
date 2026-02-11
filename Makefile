@@ -37,9 +37,6 @@ EXAMPLE_JAVA := example-java
 EXAMPLE_KOTLIN := example-kotlin
 EXAMPLE_SPRING := example-spring
 
-# Logs Directory
-LOG_DIR := build/logs
-
 # ------------------------------------------------------------------------------------
 # CORE & HELP
 # ------------------------------------------------------------------------------------
@@ -72,6 +69,7 @@ check-tools: ## Verify required tools are installed
 
 setup: check-tools ## Initial project setup (chmod +x gradlew)
 	@echo "🔧 Setting up project..."
+	@chmod +x gradlew
 	@git update-index --chmod=+x gradlew
 	@echo "✅ Project setup complete"
 

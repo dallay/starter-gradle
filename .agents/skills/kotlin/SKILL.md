@@ -202,7 +202,7 @@ name shouldStartWith "John"
 error.message shouldContain "not found"
 ```
 
-### 4. Error Handling with Result
+### 5. Error Handling with Result
 
 **Prefer `Result<T>` over exceptions for business logic**:
 
@@ -228,7 +228,7 @@ findUser(userId).fold(
 )
 ```
 
-### 5. Coroutines and Flow
+### 6. Coroutines and Flow
 
 **Embrace structured concurrency**:
 
@@ -262,7 +262,7 @@ class UserService(
 }
 ```
 
-### 6. Extension Functions
+### 7. Extension Functions
 
 **Use for enhancing existing types**:
 

@@ -43,8 +43,8 @@ git diff --name-only --diff-filter=ACMRTUXB HEAD~1..HEAD | rg "docs/architecture
 
 ## Templates (assets)
 
-- assets/mermaid-template.mmd -> minimal C4-style Mermaid snippet
-- assets/plantuml-template.puml -> PlantUML using C4-PlantUML macros
+- assets/mermaid-example.mmd -> minimal C4-style Mermaid snippet
+- assets/plantuml-example.puml -> PlantUML using C4-PlantUML macros
 - assets/README.md -> instructions to render locally
 
 ## Code Examples
@@ -52,7 +52,7 @@ git diff --name-only --diff-filter=ACMRTUXB HEAD~1..HEAD | rg "docs/architecture
 Mermaid (minimal C4-like context diagram):
 
 ```mmd
-%% assets/mermaid-template.mmd
+%% assets/mermaid-example.mmd
 flowchart TB
   %% Context - System and external actors
   actor(User):::person
