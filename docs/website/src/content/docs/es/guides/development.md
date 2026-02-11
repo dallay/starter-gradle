@@ -8,7 +8,7 @@ Esta guía describe los procedimientos estándar para desarrollar y mantener est
 
 El `Makefile` proporciona una forma estandarizada de interactuar con el proyecto en diferentes sistemas operativos.
 
-### Comandos Esenciales
+### Comandos esenciales
 
 | Comando | Descripción |
 |---------|-------------|
@@ -20,13 +20,13 @@ El `Makefile` proporciona una forma estandarizada de interactuar con el proyecto
 | `make format` | Corrige automáticamente el formateo del código |
 | `make clean` | Elimina los artefactos de construcción |
 
-### Comandos de Documentación
+### Comandos de documentación
 
 - `make docs`: Genera la documentación de la API con Dokka.
 - `make docs-web-build`: Construye el sitio web de Starlight.
 - `make docs-web-dev`: Inicia el servidor de desarrollo para el sitio web.
 
-## Flujo de Trabajo
+## Flujo de trabajo
 
 1. **Configuración**: Ejecuta `make setup` una vez después de clonar.
 2. **Desarrollo**: Escribe código en `app/` o `examples/`.
@@ -34,7 +34,7 @@ El `Makefile` proporciona una forma estandarizada de interactuar con el proyecto
 4. **Verificación**: Ejecuta `make check` antes de confirmar los cambios para asegurar que todo pase.
 5. **Pruebas**: Añade pruebas en `src/test` y ejecútalas con `make test`.
 
-## Añadir Dependencias
+## Añadir dependencias
 
 Para añadir una nueva dependencia:
 1. Defínela en `gradle/libs.versions.toml`.

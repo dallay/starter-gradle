@@ -14,12 +14,14 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 ## Instalación
 
 1. Clona el repositorio:
+
    ```bash
    git clone https://github.com/dallay/starter-gradle.git
    cd starter-gradle
    ```
 
 2. Ejecuta el comando de configuración:
+
    ```bash
    make setup
    ```
@@ -27,16 +29,19 @@ Antes de comenzar, asegúrate de tener instalado lo siguiente:
 ## Inicio Rápido
 
 ### Construir el proyecto
+
 ```bash
 make build
 ```
 
 ### Ejecutar la aplicación
+
 ```bash
 make run
 ```
 
 ### Ejecutar pruebas
+
 ```bash
 make test
 ```
