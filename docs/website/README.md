@@ -1,4 +1,4 @@
-[VitePress](https://vitepress.dev/guide/getting-started) is a static site generator built on Vue 3.
+[Astro](https://docs.astro.build/) + [Starlight](https://starlight.astro.build/) docs site.
 
 ```bash
 npm config get registry
@@ -13,4 +13,12 @@ pnpm install
 
 # Start dev server
 pnpm run dev
+
+# Build static site
+pnpm run build
+
+# Lint/format with Biome
+pnpm run check
+pnpm run lint
+pnpm run format
 ```

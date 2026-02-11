@@ -177,3 +177,11 @@ opencode.json
 docs/website/node_modules
 docs/website/dist
 docs/website/.astro
+docs/website/package-lock.json
+# Spotless Prettier Node Modules (auto-added)
+build/spotless-prettier-node-modules-*/
+build/spotless-prettier-node-modules-*/node_modules/
+build/spotless-prettier-node-modules-*/package.json
+build/spotless-prettier-node-modules-*/package-lock.json
+build/spotless-prettier-node-modules-*/serve.js
+.pnpm-store
