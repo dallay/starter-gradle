@@ -20,7 +20,7 @@ ij_java_names_count_to_use_import_on_demand = 9999
 
 # Kotlin formatting reference:
 # https://github.com/facebook/ktfmt/blob/main/docs/editorconfig/.editorconfig-google
-# date: 2024.1.1
+# Last referenced: 2024.1.1
 [{*.kt,*.kts}]
 indent_style = space
 insert_final_newline = true

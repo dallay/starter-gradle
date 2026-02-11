@@ -1,18 +1,10 @@
 @file:Suppress("UnstableApiUsage")
 
-import com.profiletailors.plugin.local.LocalConfig
-import com.profiletailors.plugin.local.getPropOrDefault
 import com.profiletailors.plugin.repo.RepositoryConfig
-
-val enableProxyRepo = settings.getPropOrDefault(LocalConfig.Props.ENABLE_PROXY_REPO).toBoolean()
 
 pluginManagement {
   repositories {
     // mavenLocal()
-    if (enableProxyRepo) {
-      // Optional proxy endpoint for plugin artifacts
-      maven { setUrl("https://repo.maven.apache.org/maven2") }
-    }
     gradlePluginPortal()
     mavenCentral() // https://repo1.maven.org/maven2
     maven {
@@ -34,10 +26,6 @@ dependencyResolutionManagement {
   repositoriesMode.set(RepositoriesMode.FAIL_ON_PROJECT_REPOS)
   repositories {
     mavenLocal()
-    if (enableProxyRepo) {
-      // Optional proxy endpoint for Maven dependencies
-      maven { setUrl("https://repo.maven.apache.org/maven2") }
-    }
     // https://status.maven.org/
     mavenCentral() // https://repo1.maven.org/maven2
     maven {

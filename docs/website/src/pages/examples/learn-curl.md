@@ -81,7 +81,7 @@ Best practice: use `-v` for headers and `--trace` for full wire-level logs.
 ```bash
 curl -v https://example.com
 curl --trace trace.bin https://example.com
-curl --trace-ssl ssl.log https://example.com
+curl --trace-ascii ssl.log https://example.com
 ```
 
 ---

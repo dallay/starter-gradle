@@ -9,9 +9,8 @@ npm i -g pnpm
 pnpm config set registry https://registry.npmjs.org/
 
 # Install dependencies
-pnpm yo
-ni
+pnpm install
 
 # Start dev server
-nr dev
+pnpm run dev
 ```

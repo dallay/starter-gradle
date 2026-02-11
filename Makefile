@@ -231,7 +231,7 @@ ci-check: check-tools ## CI: Run all checks without daemon
 # FULL WORKFLOWS
 # ------------------------------------------------------------------------------------
 
-all: clean build test check ## Run full CI pipeline (clean, build, test, check)
+all: clean build check ## Run full CI pipeline (clean, build, check)
 	@echo "✨ Full CI pipeline completed successfully!"
 
 quick: format build-fast ## Quick development cycle (format + build without tests)

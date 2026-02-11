@@ -34,7 +34,7 @@
     <exclude name="CommentDefaultAccessModifier" />
     <exclude
       name="CommentRequired"
-    /> <!-- Kept enabled in some cases because comments are an important review signal -->
+    /> <!-- CommentRequired is excluded here; re-enable when enforcing mandatory comments as a review signal -->
     <exclude name="CommentSize" />
     <!--		<exclude name="CompareObjectsWithEquals"/>-->
     <exclude name="ConfusingTernary" />

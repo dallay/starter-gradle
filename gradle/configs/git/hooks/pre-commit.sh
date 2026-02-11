@@ -5,7 +5,7 @@
 # ============================================
 
 PART1="TO"
-PART2="DY"
+PART2="DO"
 KEYWORDS="${PART1}${PART2}"
 
 # Get newly added lines from staged changes
