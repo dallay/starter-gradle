@@ -67,10 +67,10 @@ pitest {
         "-XX:+EnableDynamicAgentLoading",
       )
       .also {
-      if (jepEnablePreview) {
-        it.add("--enable-preview")
+        if (jepEnablePreview) {
+          it.add("--enable-preview")
+        }
       }
-    }
 }
 
 configurations.testCompileOnly { extendsFrom(configurations.compileOnly.get()) }
