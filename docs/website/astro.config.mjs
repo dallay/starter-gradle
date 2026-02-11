@@ -32,6 +32,34 @@ export default defineConfig({
                 es: 'Estructura del Proyecto',
               },
             },
+            {
+              label: 'Features',
+              slug: 'guides/features',
+              translations: {
+                es: 'Funcionalidades',
+              },
+            },
+            {
+              label: 'Architecture',
+              slug: 'guides/architecture',
+              translations: {
+                es: 'Arquitectura',
+              },
+            },
+            {
+              label: 'Development',
+              slug: 'guides/development',
+              translations: {
+                es: 'Desarrollo',
+              },
+            },
+            {
+              label: 'Configuration',
+              slug: 'guides/configuration',
+              translations: {
+                es: 'Configuración',
+              },
+            },
           ],
         },
       ],
