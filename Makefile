@@ -178,6 +178,22 @@ docs-serve: docs ## Generate and serve documentation locally
 	@echo "📚 Documentation generated in: build/dokka/html/"
 	@echo "📖 Open the index.html file in your browser"
 
+docs-web-build: check-tools ## Build website docs (Astro/Starlight)
+	@echo "🌐 Building website docs..."
+	@$(GRADLEW) :$(DOCS_MODULE):docStarlight
+
+docs-web-check: check-tools ## Check website docs formatting/lint (Biome)
+	@echo "🔎 Checking website docs..."
+	@$(GRADLEW) :$(DOCS_MODULE):websiteCheck
+
+docs-web-format: check-tools ## Format website docs (Biome)
+	@echo "✨ Formatting website docs..."
+	@$(GRADLEW) :$(DOCS_MODULE):websiteFormat
+
+docs-web-dev: check-tools ## Run website docs dev server
+	@echo "🌐 Starting docs dev server..."
+	@cd docs/website && pnpm run dev
+
 # ------------------------------------------------------------------------------------
 # DEPENDENCY MANAGEMENT
 # ------------------------------------------------------------------------------------
@@ -240,6 +256,7 @@ quick: format build-fast ## Quick development cycle (format + build without test
 .PHONY: help check-tools setup wrapper build build-fast clean clean-all run dev \
         run-java run-kotlin run-spring test test-app test-coverage test-verbose \
         format check-format lint-kotlin lint-java lint check docs docs-serve \
+        docs-web-build docs-web-check docs-web-format docs-web-dev \
         deps deps-app deps-analysis deps-update tasks info version ci-build \
         ci-test ci-check all quick
 

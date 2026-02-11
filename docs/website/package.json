@@ -7,11 +7,17 @@
     "start": "astro dev",
     "build": "astro build",
     "preview": "astro preview",
-    "astro": "astro"
+    "astro": "astro",
+    "format": "biome format --write src astro.config.mjs package.json tsconfig.json",
+    "lint": "biome lint src astro.config.mjs",
+    "check": "biome check src astro.config.mjs package.json tsconfig.json"
   },
   "dependencies": {
     "@astrojs/starlight": "^0.31.0",
     "astro": "^5.2.3",
     "sharp": "^0.33.5"
+  },
+  "devDependencies": {
+    "@biomejs/biome": "^2.3.14"
   }
 }
