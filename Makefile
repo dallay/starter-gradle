@@ -154,7 +154,7 @@ check-format: check-tools ## Check code formatting without fixing
 
 lint-kotlin: check-tools ## Run Kotlin linting (Detekt)
 	@echo "🔍 Running Kotlin static analysis (Detekt)..."
-	@$(GRADLEW) detektAll
+	@$(GRADLEW) detekt
 
 lint-java: check-tools ## Run Java static analysis (SpotBugs)
 	@echo "🔍 Running Java static analysis (SpotBugs)..."
