@@ -27,7 +27,7 @@ object CatalogUtil {
   fun getLibraryMetadataUrl(
     module: String,
     delimiter: Char = ':',
-    url: String = "https://mirrors.cloud.tencent.com/nexus/repository/maven-public/",
+    url: String = "https://repo.maven.apache.org/maven2/",
   ): String {
     return "${url}${transformModuleToLibraryMetadata(module, delimiter)}"
   }

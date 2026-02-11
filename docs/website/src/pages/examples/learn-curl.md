@@ -1,169 +1,129 @@
-### Curl 入门指南：掌握 HTTP 请求的核心技巧
+### Curl Quick Guide: Core HTTP Request Patterns
 
-Curl 是命令行中强大的 HTTP 工具，支持多种协议。本文按最佳实践详解核心功能，适用于**curl 7.87.0+**（推荐更新到最新版）。
+Curl is a command-line HTTP tool with broad protocol support. This guide focuses on practical
+patterns and assumes **curl 7.87.0+**.
 
 ---
 
-#### 1. **请求方法**
+#### 1. Request methods
 
-**最佳实践：** 用`-X`明确方法，GET 参数用`--url-query`避免转义问题（替代旧版`-G`+`-d`）。
+Best practice: use `-X` explicitly for non-GET requests and use `--url-query` for query params.
 
 ```bash
-# GET（默认方法，无需-X）
+# GET
 curl --url-query "name=John" --url-query "age=30" https://api.example.com/users
 
 # POST
 curl -X POST https://api.example.com/users
 
-# PUT/DELETE
+# PUT / DELETE
 curl -X PUT https://api.example.com/users/123
 curl -X DELETE https://api.example.com/users/123
 ```
 
 ---
 
-#### 2. **请求头**
+#### 2. Request headers
 
-**最佳实践：** 用`-H`添加头部，JSON 类型优先指定`Content-Type`。
+Best practice: use `-H` for auth and content type.
 
 ```bash
 curl -H "Authorization: Bearer TOKEN" \
-     -H "X-Custom-Header: value" \
-     -H "Content-Type: application/json" \
-     https://api.example.com/data
+  -H "X-Custom-Header: value" \
+  -H "Content-Type: application/json" \
+  https://api.example.com/data
 ```
 
 ---
 
-#### 3. **Cookie 管理**
+#### 3. Cookie handling
 
-**最佳实践：** 用`-b`发送 Cookie，`-c`保存响应 Cookie 到文件。
+Best practice: `-b` sends cookies and `-c` stores response cookies.
 
 ```bash
-# 发送Cookie
+# Send cookie
 curl -b "sessionid=abc123" https://example.com
 
-# 保存响应Cookie并复用
+# Save and reuse cookies
 curl -c cookies.txt https://example.com/login
 curl -b cookies.txt https://example.com/dashboard
 ```
 
 ---
 
-#### 4. **请求体**
+#### 4. Request body
 
-**最佳实践：** 根据内容类型选择参数，文件上传用`-F`。
-
-##### 4.1 普通数据（JSON/表单）
+Best practice: use `-d` for JSON/form and `-F` for multipart uploads.
 
 ```bash
-# JSON数据
-curl -X POST -d '{"name":"John"}' \
-     -H "Content-Type: application/json" \
-     https://api.example.com/users
+# JSON body
+curl -X POST \
+  -H "Content-Type: application/json" \
+  -d '{"name":"John"}' \
+  https://api.example.com/users
 
-# URL编码表单
-curl -X POST -d "username=john" -d "password=123" \
-     https://api.example.com/login
-```
+# URL-encoded form
+curl -X POST -d "username=john" -d "password=123" https://api.example.com/login
 
-##### 4.2 multipart/form-data（文件上传）
-
-```bash
-# 上传文件+文本字段（自动设置Content-Type）
-curl -X POST -F "avatar=@photo.jpg" \
-     -F "description=Profile image" \
-     https://api.example.com/upload
-
-# 指定文件名和类型
-curl -X POST -F "file=@report.pdf;filename=custom.pdf;type=application/pdf" \
-     https://api.example.com/docs
+# Multipart upload
+curl -X POST \
+  -F "avatar=@photo.jpg" \
+  -F "description=Profile image" \
+  https://api.example.com/upload
 ```
 
 ---
 
-#### 5. **请求过程追踪**
+#### 5. Debugging requests
 
-**最佳实践：** 用`-v`调试头部，`--trace`记录完整通信。
+Best practice: use `-v` for headers and `--trace` for full wire-level logs.
 
 ```bash
-# 查看请求/响应头
 curl -v https://example.com
-
-# 输出完整二进制通信过程
 curl --trace trace.bin https://example.com
-
-# 仅查看SSL握手信息
 curl --trace-ssl ssl.log https://example.com
 ```
 
 ---
 
-#### 6. **处理响应**
+#### 6. Processing responses
 
-**最佳实践：** 用管道组合工具处理响应，分离头与体。
-
-##### 6.1 响应体处理
+Best practice: separate body, headers, and status code when needed.
 
 ```bash
-# 格式化JSON响应（需jq）
+# Pretty print JSON (requires jq)
 curl https://api.example.com/data | jq .
 
-# 仅显示HTTP状态码
+# Only status code
 curl -o /dev/null -s -w "%{http_code}\n" https://example.com
-```
 
-##### 6.2 响应头处理
-
-```bash
-# 将响应头保存到文件
+# Save response headers
 curl -D headers.txt https://example.com
 
-# 仅显示响应头
+# Header-only request
 curl -I https://example.com
 ```
 
 ---
 
-#### 7. **输出控制**
+#### 7. Output control and downloads
 
-**最佳实践：** 用`-sS`静默模式，`-o`重定向输出。
+Best practice: use `-sS` for CI-friendly output and `-O` / `-J` for file downloads.
 
 ```bash
-# 静默模式（隐藏进度，显示错误）
 curl -sS https://example.com
-
-# 输出到终端+保存到文件
 curl https://example.com | tee output.html
-
-# 丢弃响应体（只关注头/状态码）
-curl -o /dev/null https://example.com
-```
-
----
-
-#### 8. **文件操作**
-
-**最佳实践：** 用`-O`保留远程文件名，`-J`配合重定向。
-
-```bash
-# 保留服务器文件名
 curl -O https://example.com/files/report.pdf
-
-# 自动从Content-Disposition获取文件名
 curl -O -J https://example.com/generate-report
-
-# 分段下载（恢复下载）
 curl -C - -O https://example.com/largefile.zip
 ```
 
 ---
 
-### 完整工作流示例
-
-#### 1. 带认证的文件上传
+### End-to-end examples
 
 ```bash
+# Authenticated upload
 curl -X POST \
   -H "Authorization: Bearer xyz" \
   -F "metadata=@data.json;type=application/json" \
@@ -174,9 +134,8 @@ curl -X POST \
   https://api.example.com/upload
 ```
 
-#### 2. 复杂 API 调用（JSON 体+查询参数）
-
 ```bash
+# PUT with query parameters and JSON payload
 curl -X PUT \
   --url-query "version=2" \
   -H "Content-Type: application/json" \
@@ -184,21 +143,6 @@ curl -X PUT \
   https://api.example.com/users/123?debug=true
 ```
 
-> **关键参数说明：**
->
-> - `-F`：multipart/form-data 上传（自动生成 boundary）
-> - `-sS`：静默模式但显示错误
-> - `-o response.json`：保存响应到文件
-> - `--url-query`：安全添加 URL 参数（避免手动编码）
+## References
 
-掌握这些实践能提升命令行 HTTP 操作效率！调试时使用：
-
-```bash
-curl --version  # 确认版本（推荐7.87.0+）
-curl --help all # 查看完整参数
-```
-
-## 参考链接：
-
-- [curl - 如何使用 --- curl - How To Use](https://curl.se/docs/manpage.html)
-- [curl 的用法指南 - 阮一峰的网络日志](https://www.ruanyifeng.com/blog/2019/09/curl-reference.html)
+- [curl manual](https://curl.se/docs/manpage.html)

@@ -1,14 +1,14 @@
 #!/bin/sh
 # ============================================
 # Git pre-commit hook
-# 检查本次提交的新增代码行中是否包含敏感关键字
+# Check whether newly added staged lines contain sensitive keywords
 # ============================================
 
 PART1="TO"
 PART2="DY"
 KEYWORDS="${PART1}${PART2}"
 
-# 获取暂存区新增行
+# Get newly added lines from staged changes
 DIFF_CONTENT=$(git diff --cached --unified=0 | grep '^+' | grep -v '^+++')
 
 [ -z "$DIFF_CONTENT" ] && exit 0

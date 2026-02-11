@@ -9,7 +9,7 @@ import org.junit.jupiter.api.Test
 class HttpUtilsTest {
 
   @Test
-  fun testBaidu() {
+  fun testGoogle() {
     val google =
       runCatching { HttpUtils.get(URI("https://www.google.com"), Duration.ofSeconds(10)) }
         .getOrDefault("Fetch failed") ?: ""

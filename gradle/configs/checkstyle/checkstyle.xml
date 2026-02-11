@@ -1,9 +1,9 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE module PUBLIC "-//Checkstyle//DTD Checkstyle Configuration 1.3//EN"
   "https://checkstyle.org/dtds/configuration_1_3.dtd">
-<!-- 你可参考spring-boot: https://github.com/spring-projects/spring-boot/tree/main/config/checkstyle -->
-<!-- 引入google的Rule, 来源于 https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml -->
-<!-- 引入nacos的Rule, 来源于 https://github.com/alibaba/nacos/blob/develop/style/NacosCheckStyle.xml -->
+<!-- Reference Spring Boot setup: https://github.com/spring-projects/spring-boot/tree/main/config/checkstyle -->
+<!-- Includes Google rules from https://github.com/checkstyle/checkstyle/blob/master/src/main/resources/google_checks.xml -->
+<!-- Includes Nacos-derived rules from https://github.com/alibaba/nacos/blob/develop/style/NacosCheckStyle.xml -->
 <!--
     Checkstyle configuration that checks the Google coding conventions from Google Java Style
     that can be found at https://google.github.io/styleguide/javaguide.html

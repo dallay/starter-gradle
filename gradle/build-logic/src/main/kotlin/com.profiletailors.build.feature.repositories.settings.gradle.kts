@@ -10,8 +10,8 @@ pluginManagement {
   repositories {
     // mavenLocal()
     if (enableProxyRepo) {
-      // https://maven.aliyun.com/mvn/guide
-      maven { setUrl("https://maven.aliyun.com/repository/gradle-plugin") }
+      // Optional proxy endpoint for plugin artifacts
+      maven { setUrl("https://repo.maven.apache.org/maven2") }
     }
     gradlePluginPortal()
     mavenCentral() // https://repo1.maven.org/maven2
@@ -35,10 +35,8 @@ dependencyResolutionManagement {
   repositories {
     mavenLocal()
     if (enableProxyRepo) {
-      // https://mirrors.cloud.tencent.com
-      maven { setUrl("https://mirrors.cloud.tencent.com/nexus/repository/maven-public") }
-      // https://maven.aliyun.com/mvn/guide
-      maven { setUrl("https://maven.aliyun.com/repository/public") }
+      // Optional proxy endpoint for Maven dependencies
+      maven { setUrl("https://repo.maven.apache.org/maven2") }
     }
     // https://status.maven.org/
     mavenCentral() // https://repo1.maven.org/maven2
@@ -60,7 +58,7 @@ dependencyResolutionManagement {
     }
     gradlePluginPortal()
     /* for 'com.github.node-gradle.node' plugin. https://nodejs.org/dist */
-    ivy("https://npmmirror.com/mirrors/node") {
+    ivy("https://nodejs.org/dist") {
       // https://docs.gradle.org/nightly/userguide/how_to_resolve_specific_artifacts.html
       patternLayout { artifact("v[revision]/[artifact](-v[revision]-[classifier]).[ext]") }
       metadataSources { artifact() }
