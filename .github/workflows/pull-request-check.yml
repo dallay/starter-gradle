@@ -28,7 +28,6 @@ jobs:
 
     steps:
       - name: ✈ Checkout default branch
-        if: github.event_name != 'issue_comment'
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           fetch-depth: 0
@@ -103,15 +102,13 @@ jobs:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
 
   mutation-tests:
+    if: github.event_name == 'pull_request' || github.event_name == 'workflow_dispatch'
     runs-on: ubuntu-latest
     timeout-minutes: 60
 
     steps:
       - name: ✈ Checkout default branch
-        if: github.event_name != 'issue_comment'
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
-        with:
-          fetch-depth: 0
 
       - name: ☕ Setup Java
         uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0
@@ -133,7 +130,7 @@ jobs:
 
       - name: 📦 Upload PIT report
         if: always()
-        uses: actions/upload-artifact@v4
+        uses: actions/upload-artifact@ea165f8d65b6e75b540449e92b4886f43607fa02 # v4
         with:
           name: pitest-report-app
           path: app/build/reports/pitest

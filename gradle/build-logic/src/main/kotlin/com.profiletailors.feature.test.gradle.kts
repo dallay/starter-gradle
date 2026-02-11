@@ -10,6 +10,7 @@ plugins {
   java
   // https://docs.gradle.org/nightly/userguide/jacoco_plugin.html
   jacoco
+  // Intentionally global in this convention: every JVM module gets a pitest task.
   id("info.solidsoft.pitest")
 }
 
@@ -61,7 +62,11 @@ pitest {
   outputFormats = setOf("HTML", "XML")
   timestampedReports = false
   jvmArgs =
-    mutableListOf("-Dfile.encoding=${StandardCharsets.UTF_8.name()}").also {
+    mutableListOf(
+        "-Dfile.encoding=${StandardCharsets.UTF_8.name()}",
+        "-XX:+EnableDynamicAgentLoading",
+      )
+      .also {
       if (jepEnablePreview) {
         it.add("--enable-preview")
       }
