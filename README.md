@@ -76,13 +76,68 @@ dependencies: [declaring_module_dependencies](https://docs.gradle.org/nightly/us
 
 ## 🍰 Project Usage
 
-you can run `./gradlew help` to get
-gradle [commands-line usage help](https://docs.gradle.org/current/userguide/command_line_interface.html).
+### Using Make (Recommended)
 
-you can run `git update-index --chmod=+x gradlew` to make gradlew executable.
+This project includes a `Makefile` with standardized commands that work across all operating systems:
+
+```shell
+make help              # Show all available commands
+make run               # Run the main application
+make build             # Build the entire project
+make test              # Run all tests
+make check             # Run all checks (format, lint, tests)
+```
+
+#### Quick Reference
+
+| Command | Description |
+|---------|-------------|
+| `make run` | Run the main application (app module) |
+| `make build` | Build the entire project |
+| `make build-fast` | Build without tests (faster) |
+| `make test` | Run all tests |
+| `make test-coverage` | Run tests with coverage report |
+| `make format` | Format all code (Spotless) |
+| `make check` | Run all checks (format + lint + tests) |
+| `make clean` | Clean build artifacts |
+| `make deps` | Show project dependencies |
+
+#### Examples
+
+```shell
+# Quick development cycle
+make format build-fast
+
+# Run specific example
+make run-java      # Run Java example
+make run-kotlin    # Run Kotlin example
+make run-spring    # Run Spring example
+
+# Full CI pipeline
+make all          # clean + build + test + check
+```
+
+### Using Gradle Directly
+
+You can also run `./gradlew help` to get
+Gradle [command-line usage help](https://docs.gradle.org/current/userguide/command_line_interface.html).
+
+```shell
+./gradlew help                    # Show Gradle help
+./gradlew build                   # Build project
+./gradlew app:run                 # Run app module
+./gradlew test                    # Run tests
+./gradlew check                   # Run all checks
+```
+
+### Initial Setup
+
+Make the Gradle wrapper executable:
 
 ```shell
 git update-index --chmod=+x gradlew
+# Or use make:
+make setup
 ```
 
 ## 🏝️ Thanks

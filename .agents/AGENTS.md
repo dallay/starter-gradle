@@ -6,7 +6,39 @@ The main application, located in the `app` module, is a basic command-line appli
 
 # Building and Running
 
-The project utilizes the Gradle wrapper for all build and run operations.
+The project provides a `Makefile` with standardized commands that work consistently across all operating systems (Linux, macOS, Windows with Git Bash/WSL).
+
+## Using Make (Preferred)
+
+*   **Show all available commands:**
+    ```bash
+    make help
+    ```
+*   **Build the entire project:**
+    ```bash
+    make build
+    ```
+*   **Run the main application module (`app`):**
+    ```bash
+    make run
+    ```
+*   **Run tests:**
+    ```bash
+    make test
+    ```
+*   **Format code and run all checks:**
+    ```bash
+    make format
+    make check
+    ```
+*   **Clean build artifacts:**
+    ```bash
+    make clean
+    ```
+
+## Using Gradle Directly
+
+For advanced usage, the project also supports direct Gradle wrapper commands:
 
 *   **Build the entire project:**
     ```bash
@@ -23,6 +55,7 @@ The project utilizes the Gradle wrapper for all build and run operations.
 *   **Ensure `gradlew` script is executable (if needed):**
     ```bash
     git update-index --chmod=+x gradlew
+    # Or: make setup
     ```
 
 # Development Conventions
