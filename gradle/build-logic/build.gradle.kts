@@ -62,6 +62,7 @@ dependencies {
       libs.plugins.org.openrewrite.rewrite,
       libs.plugins.org.springframework.boot,
       libs.plugins.org.openapi.generator,
+      libs.plugins.info.solidsoft.pitest,
     )
     .forEach {
       val plugin = it.get()
