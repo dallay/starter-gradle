@@ -10,6 +10,7 @@ plugins {
   java
   // https://docs.gradle.org/nightly/userguide/jacoco_plugin.html
   jacoco
+  id("info.solidsoft.pitest")
 }
 
 val jepEnablePreview = project.getPropOrDefault(LocalConfig.Props.JEP_ENABLE_PREVIEW).toBoolean()
@@ -51,6 +52,20 @@ testing {
 
 if (junitJupiterM2Enabled) {
   useJUnitJupiterM2()
+}
+
+pitest {
+  targetClasses = setOf("${project.group}.*")
+  junit5PluginVersion = "1.0.0"
+  threads = 4
+  outputFormats = setOf("HTML", "XML")
+  timestampedReports = false
+  jvmArgs =
+    mutableListOf("-Dfile.encoding=${StandardCharsets.UTF_8.name()}").also {
+      if (jepEnablePreview) {
+        it.add("--enable-preview")
+      }
+    }
 }
 
 configurations.testCompileOnly { extendsFrom(configurations.compileOnly.get()) }

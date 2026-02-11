@@ -101,3 +101,32 @@ jobs:
           files: ./gradle/aggregation/build/reports/coverage/coverage.xml
         env:
           CODECOV_TOKEN: ${{ secrets.CODECOV_TOKEN }}
+
+  mutation-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 60
+
+    steps:
+      - name: ✈ Checkout default branch
+        if: github.event_name != 'issue_comment'
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+        with:
+          fetch-depth: 0
+
+      - name: ☕ Setup Java
+        uses: actions/setup-java@dded0888837ed1f317902acf8a20df0ad188d165 # v5.0.0
+        with:
+          java-version: "25"
+          distribution: "corretto"
+
+      - name: 🐘 Setup Gradle
+        uses: gradle/actions/setup-gradle@4d9f0ba0025fe599b4ebab900eb7f3a1d93ef4c2 # v5.0.0
+        with:
+          gradle-version: wrapper
+          cache-read-only: false
+
+      - name: 🔧 Make Gradle wrapper executable
+        run: chmod +x ./gradlew
+
+      - name: 🧬 Run mutation tests (PIT)
+        run: ./gradlew :app:pitest
