@@ -8,11 +8,11 @@
 
   <description>Dy Rules</description>
 
-  <!-- 项目中需要排除的包 -->
+  <!-- Excluded package patterns -->
   <!-- default excludes. -->
   <exclude-pattern>(.*/)?(nocheck|autogen|generated)(/.*)?$</exclude-pattern>
 
-  <!-- 引入PMD Rule, 来源于 https://github.com/Netflix/spectator/blob/main/codequality/pmd.xml  -->
+  <!-- Includes PMD rules adapted from https://github.com/Netflix/spectator/blob/main/codequality/pmd.xml -->
   <rule ref="rulesets/internal/all-java.xml">
     <!--		<exclude name="AccessorMethodGeneration"/>-->
     <!--		<exclude name="AddEmptyString"/>-->
@@ -34,7 +34,7 @@
     <exclude name="CommentDefaultAccessModifier" />
     <exclude
       name="CommentRequired"
-    /> <!-- 有条件情况下还是放开，注释是重要的一个环节 -->
+    /> <!-- CommentRequired is excluded here; re-enable when enforcing mandatory comments as a review signal -->
     <exclude name="CommentSize" />
     <!--		<exclude name="CompareObjectsWithEquals"/>-->
     <exclude name="ConfusingTernary" />
@@ -89,7 +89,8 @@
     </properties>
   </rule>
 
-  <!-- 引入阿里 Rule, 来源于 https://github.com/alibaba/p3c/tree/master/p3c-pmd/src/main/resources/rulesets/java -->
+  <!-- Optional Alibaba P3C rules reference:
+       https://github.com/alibaba/p3c/tree/master/p3c-pmd/src/main/resources/rulesets/java -->
   <!--  <rule ref="rulesets/java/ali-comment.xml">-->
   <!--    <exclude name="RemoveCommentedCodeRule" />-->
   <!--  </rule>-->

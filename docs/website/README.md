@@ -1,17 +1,16 @@
-[VitePress](https://vitepress.dev/zh/guide/getting-started) 是一个静态站点生成器，基于 Vue 3 的编译器。
+[VitePress](https://vitepress.dev/guide/getting-started) is a static site generator built on Vue 3.
 
 ```bash
 npm config get registry
-npm config set registry https://mirrors.cloud.tencent.com/npm/
+npm config set registry https://registry.npmjs.org/
 
-# 安装pnpm
+# Install pnpm
 npm i -g pnpm
-pnpm config set registry https://mirrors.cloud.tencent.com/npm/
+pnpm config set registry https://registry.npmjs.org/
 
-# 安装依赖
-pnpm yo
-ni
+# Install dependencies
+pnpm install
 
-# 启动服务
-nr dev
+# Start dev server
+pnpm run dev
 ```

@@ -20,10 +20,10 @@ DevSecOps toolchain:
 - code-coverage
   - [Jacoco](https://github.com/jacoco/jacoco), [kover](https://github.com/Kotlin/kotlinx-kover/issues/746)
 - CI/CD(Continuous Integration/Continuous Deployment)
-  - [Jenkins](https://www.jenkins.io/), [GitHub Actions](https://github.com/features/actions), [Yunxiao](https://devops.console.aliyun.com/organizations), [Travis](https://www.travis-ci.com)
-- Tracing、Logging、Reporting、Monitoring、Automation...
+  - [Jenkins](https://www.jenkins.io/), [GitHub Actions](https://github.com/features/actions), [Travis](https://www.travis-ci.com)
+- Tracing, Logging, Reporting, Monitoring, Automation...
 - DevSecOps
-  - ([CodeQL](https://codeql.github.com/), [Mend](https://www.mend.io/)), ([Codecov](https://about.codecov.io/)), ([Codacy](https://www.codacy.com/), [SonarQube](https://www.sonarsource.com/zh/), [Qodana](https://www.jetbrains.com.cn/qodana/))
+  - ([CodeQL](https://codeql.github.com/), [Mend](https://www.mend.io/)), ([Codecov](https://about.codecov.io/)), ([Codacy](https://www.codacy.com/), [SonarQube](https://www.sonarsource.com/), [Qodana](https://www.jetbrains.com/qodana/))
 
 Code Quality: `Dependency Security` `Test Coverage Visualization` `Comprehensive Analysis`
 
