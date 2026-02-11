@@ -283,7 +283,7 @@ This controller is the gold standard for Swagger documentation in the project.
 Before committing:
 
 ```bash
-make verify-all  # Debe pasar sin errores
+make verify-all  # Should pass without errors
 ```
 
 To view the generated documentation:
