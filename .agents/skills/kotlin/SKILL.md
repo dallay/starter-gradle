@@ -123,7 +123,8 @@ fun update(@RequestBody req: Request)
  */
 ```
 
-See [no-fully-qualified-references.md](references/no-fully-qualified-references.md) for detailed rules.
+See [no-fully-qualified-references.md](references/no-fully-qualified-references.md) for detailed
+rules.
 
 ## Testing with Kotest
 
@@ -349,7 +350,8 @@ logger.info { "User logged in: password=${user.password}" }  // WRONG!
 
 ### Rules
 
-- **[No Fully Qualified References](references/no-fully-qualified-references.md)**: Avoid inline fully-qualified names; favor imports.
+- **[No Fully Qualified References](references/no-fully-qualified-references.md)**: Avoid inline
+  fully-qualified names; favor imports.
 
 ## Commands
 

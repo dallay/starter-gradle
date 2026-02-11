@@ -7,20 +7,26 @@ metadata:
   author: cvix-team
   version: "1.0"
 ---
+
 # C4 Diagrams Skill
 
 ## When to Use
 
-- When you need to generate or update system/containers/components/context diagrams following the C4 model.
+- When you need to generate or update system/containers/components/context diagrams following the C4
+  model.
 - Trigger: changes under `docs/architecture/diagrams` or creating new architecture artifacts.
 
 ## Critical Patterns
 
-- Keep diagrams as source files in `docs/architecture/diagrams` using either Mermaid (.mmd/.mmdx) or PlantUML (.puml).
-- Prefer small, focused diagrams per file (one diagram per file). Don't bloat a single file with all C4 levels.
+- Keep diagrams as source files in `docs/architecture/diagrams` using either Mermaid (.mmd/.mmdx) or
+  PlantUML (.puml).
+- Prefer small, focused diagrams per file (one diagram per file). Don't bloat a single file with all
+  C4 levels.
 - Use consistent IDs and naming for elements across diagrams (SYSTEM_xxx, CONTAINER_xxx, COMP_xxx).
-- Version diagrams in git. The skill MUST not modify files without creating clear diffs and a suggested commit message.
-- Always provide both Mermaid and PlantUML variants when a diagram is shared with external stakeholders who may prefer one renderer.
+- Version diagrams in git. The skill MUST not modify files without creating clear diffs and a
+  suggested commit message.
+- Always provide both Mermaid and PlantUML variants when a diagram is shared with external
+  stakeholders who may prefer one renderer.
 
 ## Commands
 
@@ -73,8 +79,11 @@ Rel(user, webapp, "uses")
 
 - When asked to update diagrams, propose both Mermaid and PlantUML outputs when possible.
 - Validate diagram syntax and show render command output or error.
-- When creating new diagram files, place them under `docs/architecture/diagrams/<level>/<name>.<ext>` where `<level>` is context|container|component|code.
-- Add a short header comment in each generated file with: generation timestamp, generator name (`c4-diagrams skill`), and git SHA (if available).
+- When creating new diagram files, place them under
+  `docs/architecture/diagrams/<level>/<name>.<ext>` where `<level>` is
+  context|container|component|code.
+- Add a short header comment in each generated file with: generation timestamp, generator name (
+  `c4-diagrams skill`), and git SHA (if available).
 
 ## Resources
 

@@ -1,20 +1,21 @@
 ---
 name: spring-boot-best-practices
 description: >
-    Spring Boot, Kotlin, and WebFlux implementation patterns.
-    Trigger: When writing any Spring Boot code, reviewing PRs, or refactoring.
-    Includes: Dependency Injection, Controller design, DTOs, Error Handling, Testing.
+  Spring Boot, Kotlin, and WebFlux implementation patterns.
+  Trigger: When writing any Spring Boot code, reviewing PRs, or refactoring.
+  Includes: Dependency Injection, Controller design, DTOs, Error Handling, Testing.
 allowed-tools: Read, Edit, Write, Glob, Grep, Bash
 metadata:
-    author: danvega (adapted by cvix)
-    version: "1.0"
+  author: danvega (adapted by cvix)
+  version: "1.0"
 ---
 
 # Spring Boot & Kotlin Best Practices
 
 Clean code patterns for Spring Boot applications using **Kotlin** and **WebFlux**.
 
-> **Note**: For high-level architecture (Ports & Adapters), see the [hexagonal-architecture](../hexagonal-architecture/SKILL.md) skill.
+> **Note**: For high-level architecture (Ports & Adapters), see
+> the [hexagonal-architecture](../hexagonal-architecture/SKILL.md) skill.
 > This skill focuses on implementation details.
 
 ## Dependency Injection
@@ -25,14 +26,14 @@ Clean code patterns for Spring Boot applications using **Kotlin** and **WebFlux*
 // ❌ Don't
 @RestController
 class UserController {
-    @Autowired
-    lateinit var userService: UserService
+  @Autowired
+  lateinit var userService: UserService
 }
 
 // ✅ Do
 @RestController
 class UserController(
-    private val userService: UserService
+  private val userService: UserService
 )
 ```
 
@@ -47,26 +48,26 @@ class UserController(
 @RequestMapping("/api/users")
 class UserController(private val userService: UserService) {
 
-    // ✅ Use suspend functions for async operations
-    @GetMapping("/{id}")
-    suspend fun getUser(@PathVariable id: Long): ResponseEntity<UserResponse> {
-        return userService.findById(id)
-            ?.let { ResponseEntity.ok(it) }
-            ?: ResponseEntity.notFound().build()
-    }
+  // ✅ Use suspend functions for async operations
+  @GetMapping("/{id}")
+  suspend fun getUser(@PathVariable id: Long): ResponseEntity<UserResponse> {
+    return userService.findById(id)
+      ?.let { ResponseEntity.ok(it) }
+      ?: ResponseEntity.notFound().build()
+  }
 
-    // ✅ Use Flow for streams (Server-Sent Events / JSON stream)
-    @GetMapping
-    fun getAllUsers(): Flow<UserResponse> {
-        return userService.findAll()
-    }
+  // ✅ Use Flow for streams (Server-Sent Events / JSON stream)
+  @GetMapping
+  fun getAllUsers(): Flow<UserResponse> {
+    return userService.findAll()
+  }
 
-    // ✅ Return standard HTTP status codes
-    @PostMapping
-    @ResponseStatus(HttpStatus.CREATED)
-    suspend fun createUser(@RequestBody request: CreateUserRequest): UserResponse {
-        return userService.create(request)
-    }
+  // ✅ Return standard HTTP status codes
+  @PostMapping
+  @ResponseStatus(HttpStatus.CREATED)
+  suspend fun createUser(@RequestBody request: CreateUserRequest): UserResponse {
+    return userService.create(request)
+  }
 }
 ```
 
@@ -77,13 +78,13 @@ class UserController(private val userService: UserService) {
 ```kotlin
 // Immutable, concise, JSON-friendly
 data class UserDto(
-    val email: String,
-    val name: String
+  val email: String,
+  val name: String
 )
 
 data class CreateUserRequest(
-    val email: String,
-    val name: String
+  val email: String,
+  val name: String
 )
 ```
 
@@ -97,12 +98,12 @@ Avoid exposing `@Table` entities directly in the API. Map them to DTOs.
 @RestControllerAdvice
 class GlobalExceptionHandler {
 
-    @ExceptionHandler(ResourceNotFoundException::class)
-    fun handleNotFound(e: ResourceNotFoundException): ProblemDetail {
-        return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.message ?: "Not found").apply {
-            title = "Resource Not Found"
-        }
+  @ExceptionHandler(ResourceNotFoundException::class)
+  fun handleNotFound(e: ResourceNotFoundException): ProblemDetail {
+    return ProblemDetail.forStatusAndDetail(HttpStatus.NOT_FOUND, e.message ?: "Not found").apply {
+      title = "Resource Not Found"
     }
+  }
 }
 ```
 
@@ -110,28 +111,28 @@ class GlobalExceptionHandler {
 
 **Use Slices for Speed.**
 
-| Annotation | Use Case |
-|------------|----------|
-| `@WebFluxTest` | Reactive Controllers (mock services) |
+| Annotation       | Use Case                                    |
+|------------------|---------------------------------------------|
+| `@WebFluxTest`   | Reactive Controllers (mock services)        |
 | `@DataR2dbcTest` | R2DBC Repositories (real DB/Testcontainers) |
-| `@JsonTest` | JSON serialization |
+| `@JsonTest`      | JSON serialization                          |
 
 ```kotlin
 // ✅ Integration test for Controller only
 @WebFluxTest(UserController::class)
 class UserControllerTest(@Autowired val webTestClient: WebTestClient) {
 
-    @MockkBean
-    lateinit var userService: UserService
+  @MockkBean
+  lateinit var userService: UserService
 
-    @Test
-    fun `should return user`() {
-        coEvery { userService.findById(1) } returns UserResponse(...)
+  @Test
+  fun `should return user`() {
+    coEvery { userService.findById(1) } returns UserResponse(...)
 
-        webTestClient.get().uri("/api/users/1")
-            .exchange()
-            .expectStatus().isOk
-    }
+    webTestClient.get().uri("/api/users/1")
+      .exchange()
+      .expectStatus().isOk
+  }
 }
 ```
 
@@ -142,13 +143,14 @@ class UserControllerTest(@Autowired val webTestClient: WebTestClient) {
 ```kotlin
 @ConfigurationProperties(prefix = "app.mail")
 data class MailProperties(
-    val host: String = "smtp.example.com",
-    val port: Int = 587,
-    val ssl: Boolean = false
+  val host: String = "smtp.example.com",
+  val port: Int = 587,
+  val ssl: Boolean = false
 )
 ```
 
-Enable with `@EnableConfigurationProperties(MailProperties::class)` in your main class or configuration.
+Enable with `@EnableConfigurationProperties(MailProperties::class)` in your main class or
+configuration.
 
 ## Package Structure
 
@@ -171,7 +173,7 @@ This aligns with Hexagonal Architecture (Bounded Contexts).
 
 **Use Declarative Clients (`@HttpExchange`).**
 
-See [spring-boot-4](../spring-boot-4/SKILL.md) for details.
+See [spring-boot](../spring-boot/SKILL.md) for details.
 
 ## Observability
 
@@ -180,7 +182,7 @@ Use Micrometer with Coroutines context.
 ```kotlin
 @GetMapping("/{id}")
 suspend fun getUser(@PathVariable id: Long): User {
-    // Context propagation works automatically with Micrometer & Reactor Context
-    return userService.findById(id)
+  // Context propagation works automatically with Micrometer & Reactor Context
+  return userService.findById(id)
 }
 ```
