@@ -35,5 +35,8 @@ cat <<EOF
 Next steps (recommended):
   1) Review the change: git diff $prop_file
   2) Commit the change: git add $prop_file && git commit -m "chore: sync version to $version"
-  3) Push your branch and tag as appropriate. Note: if you created the tag before committing this change, update the tag to point to the commit you want (git tag -f v$version) and push with --force if necessary.
+  3) Push your branch and tag as appropriate.
+     If tag v$version already exists but points at the wrong commit, prefer creating a new patch version.
+     Only force-update a tag after confirming no one else depends on it and with explicit confirmation.
+     See "Version already exists" troubleshooting guidance in docs/website/src/content/docs/en/guides/release.md.
 EOF
