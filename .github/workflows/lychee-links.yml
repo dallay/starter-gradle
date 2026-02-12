@@ -36,9 +36,4 @@ jobs:
       - name: 🔗 Check links
         uses: lycheeverse/lychee-action@a8c4c7c819fc9f3dbad31d24714f96f309877a2f # v2.7.0
         with:
-          args: >-
-            --no-progress
-            --max-retries 2
-            --retry-wait-time 2
-            --exclude-all-private
-            .
+          args: --no-progress --exclude-all-private .

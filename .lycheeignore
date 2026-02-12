@@ -2,3 +2,23 @@
 ^https?://127\.0\.0\.1
 ^https?://0\.0\.0\.0
 ^mailto:.*@example\.com
+
+# Maven central snapshots not yet deployed
+^https://central\.sonatype\.com/repository/maven-snapshots/.*
+
+# Mend.io returns 403 Forbidden to bots
+^https://www\.mend\.io/.*
+
+# Checkstyle header file contains regex patterns that look like URLs
+gradle/configs/checkstyle/checkstyle-header-file\.txt
+
+# Internal docs links resolved by Astro/Starlight at build time
+# These are links to other pages within the documentation that Astro resolves at build time
+# Root-relative links: /en/guides/pagename or /es/guides/pagename
+^/(en|es)/guides/[a-z0-9-]+$
+^/(en|es)/guides/[a-z0-9-]+/$
+# Relative links in frontmatter: guides/pagename/
+^guides/[a-z0-9-]+/?$
+# Any link ending with guide page names (without extension)
+/guides/(gpg-setup|architecture|development|features|structure|getting-started|release|configuration)$
+/guides/(gpg-setup|architecture|development|features|structure|getting-started|release|configuration)/$
