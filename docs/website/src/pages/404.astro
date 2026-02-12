@@ -3,6 +3,7 @@ import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
 import { Icon } from '@astrojs/starlight/components'
 
 const baseUrl = import.meta.env.BASE_URL
+const normalizedBaseUrl = baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'
 
 // Detect locale from pathname (e.g., /starter-gradle/es/...)
 const pathname = Astro.url.pathname
@@ -40,7 +41,7 @@ const labels = t[locale]
       <p class="tagline">{labels.tagline}</p>
 
       <div class="actions">
-        <a href={`${baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'}${locale}/`} class="primary-button">
+        <a href={`${normalizedBaseUrl}${locale}/`} class="primary-button">
           <Icon name="right-arrow" />
           <span>{labels.home}</span>
         </a>
@@ -51,11 +52,11 @@ const labels = t[locale]
       </div>
 
       <div class="links-grid">
-        <a href={`${baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'}${locale}/guides/getting-started/`} class="link-card">
+        <a href={`${normalizedBaseUrl}${locale}/guides/getting-started/`} class="link-card">
           <Icon name="rocket" />
           <span>{labels.gettingStarted}</span>
         </a>
-        <a href={`${baseUrl.endsWith('/') ? baseUrl : baseUrl + '/'}${locale}/guides/structure/`} class="link-card">
+        <a href={`${normalizedBaseUrl}${locale}/guides/structure/`} class="link-card">
           <Icon name="puzzle" />
           <span>{labels.structure}</span>
         </a>
