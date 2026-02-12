@@ -10,7 +10,7 @@ export default defineConfig({
       title: 'Starter Gradle',
       defaultLocale: 'en',
       locales: {
-        en: { label: 'English', lang: 'en', dir: 'ltr', root: 'en' },
+        en: { label: 'English', lang: 'en' },
         es: { label: 'Español', lang: 'es' },
       },
       plugins: [viewTransitions()],
