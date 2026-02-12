@@ -258,7 +258,7 @@ all: clean build check ## Run full CI pipeline (clean, build, check)
 quick: format build-fast ## Quick development cycle (format + build without tests)
 	@echo "✨ Quick build completed!"
 
-sync-version: ## Sincroniza VERSION en gradle.properties con el último tag git (vX.Y.Z)
+sync-version: ## Sync VERSION in gradle.properties with the latest git tag (vX.Y.Z)
 	@bash ./sync-version-with-tag.sh
 
 .PHONY: help check-tools setup wrapper build build-fast clean clean-all run dev \
@@ -266,4 +266,4 @@ sync-version: ## Sincroniza VERSION en gradle.properties con el último tag git 
         format check-format lint-kotlin lint-java lint check docs docs-serve \
         docs-web-build docs-web-check docs-web-format docs-web-dev \
         deps deps-app deps-analysis deps-update tasks info version ci-build \
-        ci-test ci-check all quick
+        ci-test ci-check all quick sync-version
