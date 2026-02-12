@@ -1,9 +1,8 @@
 # Lychee configuration file
 # See https://github.com/lycheeverse/lychee#configuration
 
-# Root directory for resolving root-relative links
-# This allows lychee to resolve links like /en/guides/getting-started/
-root_dir = "docs/website/src/content/docs"
+# Note: root_dir is not set because it requires absolute paths.
+# Internal docs links are handled via exclude patterns below.
 
 # Exclude these URLs from link checking
 exclude = [

@@ -48,6 +48,6 @@ make test
 
 ## Siguientes Pasos
 
-- Explora la [Estructura del Proyecto](/es/guides/structure/) para entender cómo están organizados los archivos.
-- Consulta la [Lista de Funcionalidades](/es/guides/features/) para conocer las capacidades disponibles.
-- Aprende sobre los [Procedimientos de Desarrollo](/es/guides/development/) estándar.
+- Explora la [Estructura del Proyecto](./structure/) para entender cómo están organizados los archivos.
+- Consulta la [Lista de Funcionalidades](./features/) para conocer las capacidades disponibles.
+- Aprende sobre los [Procedimientos de Desarrollo](./development/) estándar.
