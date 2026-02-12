@@ -5,9 +5,32 @@ to triage issues, review & merge PRs, and publish releases.
 
 ## Issue Triage Workflow
 
-the workflow for triaging issues is as follows(from vuejs/core):
+the workflow for triaging issues is as follows (from vuejs/core):
 
-![Workflow](./assets/issue-workflow.png)
+```mermaid
+flowchart TD
+    A[Followed issue template?] -->|NO| B[Close and ask to follow template]
+    A -->|YES| C[Is duplicate?]
+    C -->|YES| D[Close and point to duplicate]
+    C -->|NO| E[Has proper reproduction?]
+    E -->|NO| F[Label: "needs reproduction"<br/>bot will auto close if no update<br/>has been made in 3 days]
+    E -->|YES| G[Is actually a bug?]
+    
+    G -->|NO| H{Is the behavior intended?}
+    H -->|YES| I[Explain and close<br/>point to docs if needed]
+    H -->|NO| J[Keep open for discussion<br/>Remove "pending triage" label]
+    
+    G -->|YES| K[1. Remove "pending triage" label<br/>2. Add "bug" label<br/>3. Add related feature label if applicable<br/>4. Add priority label]
+    
+    K --> L{Does the bug make<br/>Vite unusable?}
+    L -->|YES| M{Does the bug affects<br/>the majority of users?}
+    M -->|YES| N[p5: urgent]
+    M -->|NO| O[p4: important]
+    
+    L -->|NO| P{Are there workarounds<br/>for the bug?}
+    P -->|YES| Q[p2: has workaround]
+    P -->|NO| R[p3: minor bug]
+```
 
 ## Pull Request Review Guidelines
 
