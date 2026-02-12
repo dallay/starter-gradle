@@ -67,7 +67,7 @@ git push origin main
 git push origin v0.1.1
 ```
 
-1) If you created the tag first (what caused the CI failure you saw), sync the code to the tag locally and commit the change
+2) If you created the tag first (what caused the CI failure you saw), sync the code to the tag locally and commit the change
 
 ```bash
 # Ensure tag exists locally (or fetch it)

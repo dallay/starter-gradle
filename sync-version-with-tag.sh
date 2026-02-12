@@ -4,8 +4,8 @@
 
 set -euo pipefail
 
-# Get the latest tag matching vX.Y.Z
-tag=$(git describe --tags --abbrev=0 | grep -Eo '^v[0-9]+\.[0-9]+\.[0-9]+$' || true)
+# Get the globally latest semantic version tag matching vX.Y.Z
+tag=$(git tag --sort=-v:refname | grep -Em1 '^v[0-9]+\.[0-9]+\.[0-9]+$' || true)
 if [[ -z "$tag" ]]; then
   echo "ERROR: No tag matching vX.Y.Z was found."
   exit 1
@@ -20,9 +20,13 @@ if [[ ! -f $prop_file ]]; then
   exit 1
 fi
 
-# Replace the VERSION=... line
-sed -i.bak -E "s/^VERSION=.*/VERSION=$version/" "$prop_file"
-rm -f "$prop_file.bak"
+# Update the VERSION= line or append if missing
+if grep -q '^VERSION=' "$prop_file"; then
+  sed -i.bak -E "s/^VERSION=.*/VERSION=$version/" "$prop_file"
+  rm -f "$prop_file.bak"
+else
+  echo "VERSION=$version" >> "$prop_file"
+fi
 
 echo "OK: gradle.properties updated to VERSION=$version"
 
