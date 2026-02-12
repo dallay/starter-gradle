@@ -1,15 +1,20 @@
+---
+// This page handles the redirect from root to the default locale
+// respecting the base path configuration
+---
+
 <!doctype html>
 <html lang="en">
   <head>
     <meta charset="utf-8" />
-    <meta http-equiv="refresh" content="0;url=/en/" />
-    <link rel="canonical" href="/en/" />
+    <meta http-equiv="refresh" content={`0;url=${import.meta.env.BASE_URL}/en/`} />
+    <link rel="canonical" href={`${import.meta.env.BASE_URL}/en/`} />
     <title>Redirecting…</title>
   </head>
   <body>
-    <p>Redirecting to <a href="/en/">/en/</a>.</p>
-    <script is:inline>
-      window.location.replace('/en/')
+    <p>Redirecting to <a href={`${import.meta.env.BASE_URL}/en/`}>{import.meta.env.BASE_URL}/en/</a>.</p>
+    <script is:inline define:vars={{ baseUrl: import.meta.env.BASE_URL }}>
+      window.location.replace(baseUrl + '/en/')
     </script>
   </body>
 </html>
