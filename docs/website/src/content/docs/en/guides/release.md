@@ -8,7 +8,7 @@ This guide explains how to publish releases and snapshots to Maven Central using
 
 Before you can publish, ensure you have:
 
-1. **GPG Key configured**: Follow the [GPG Setup Guide](gpg-setup) to create and configure your signing key
+1. **GPG Key configured**: Follow the [GPG Setup Guide](../gpg-setup/) to create and configure your signing key
 2. **Maven Central access**: Repository secrets configured:
    - `SIGNING_IN_MEMORY_KEY`: Your GPG private key
    - `SIGNING_IN_MEMORY_KEY_PASSWORD`: GPG key passphrase
@@ -127,6 +127,6 @@ Use this checklist before publishing:
 
 ## See Also
 
-- [GPG Setup Guide](gpg-setup)
+- [GPG Setup Guide](../gpg-setup/)
 - [GitHub Workflows](https://github.com/dallay/starter-gradle/blob/main/.github/workflows/README.md)
 - [Contributing Guide](https://github.com/dallay/starter-gradle/blob/main/.github/CONTRIBUTING.md)

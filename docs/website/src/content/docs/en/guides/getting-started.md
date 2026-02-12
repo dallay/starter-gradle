@@ -43,6 +43,6 @@ make test
 
 ## Next Steps
 
-- Explore the [Project Structure](./structure/) to understand how files are organized.
-- Check the [Features Checklist](./features/) for available functionalities.
-- Learn about standard [Development Procedures](./development/).
+- Explore the [Project Structure](../structure/) to understand how files are organized.
+- Check the [Features Checklist](../features/) for available functionalities.
+- Learn about standard [Development Procedures](../development/).

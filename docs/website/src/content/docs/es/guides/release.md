@@ -8,7 +8,7 @@ Esta guía explica cómo publicar releases y snapshots en Maven Central usando G
 
 Antes de poder publicar, asegúrate de tener:
 
-1. **Clave GPG configurada**: Sigue la [Guía de Configuración GPG](gpg-setup) para crear y configurar tu clave de firma
+1. **Clave GPG configurada**: Sigue la [Guía de Configuración GPG](../gpg-setup/) para crear y configurar tu clave de firma
 2. **Acceso a Maven Central**: Secrets del repositorio configurados:
    - `SIGNING_IN_MEMORY_KEY`: Tu clave privada GPG
    - `SIGNING_IN_MEMORY_KEY_PASSWORD`: Contraseña de la clave GPG
@@ -127,6 +127,6 @@ Usa este checklist antes de publicar:
 
 ## Ver También
 
-- [Guía de Configuración GPG](gpg-setup)
+- [Guía de Configuración GPG](../gpg-setup/)
 - [GitHub Workflows](https://github.com/dallay/starter-gradle/blob/main/.github/workflows/README.md)
 - [Guía de Contribución](https://github.com/dallay/starter-gradle/blob/main/.github/CONTRIBUTING.md)
