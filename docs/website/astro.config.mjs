@@ -102,6 +102,13 @@ export default defineConfig({
                 es: 'Configuración',
               },
             },
+            {
+              label: 'Release Process',
+              slug: 'guides/release',
+              translations: {
+                es: 'Proceso de Release',
+              },
+            },
           ],
         },
       ],
