@@ -20,6 +20,7 @@ This directory contains all GitHub Actions workflows for the starter-gradle proj
 | **Repo Mgmt**   | `git-sync-labels.yml`                | Sync labels from config              | Push to `labels.yml`                    |
 | **Quality**     | `semantic-pull-request.yml`          | Lint PR titles                       | PR open/edit                            |
 | **Quality**     | `pull-request-limit.yml`             | Block changes to restricted files    | PR touching CODEOWNERS/workflows        |
+| **Quality**     | `lychee-links.yml`                   | Check project links with Lychee      | Push, PR, daily schedule, manual        |
 | **Maintenance** | `cleanup-cache.yml`                  | Clean up Action caches               | PR closed                               |
 | **Maintenance** | `stale.yml`                          | Mark stale issues/PRs                | Daily schedule                          |
 | **Reporting**   | `contributor-report.yml`             | PR contributor reports               | PR events                               |
@@ -371,6 +372,29 @@ Calls the shared workflow from `dallay/common-actions/.github/workflows/semantic
 1. Adds `close|invalid` label
 2. Comments explaining the restriction
 3. Closes the PR
+
+---
+
+### `lychee-links.yml` - Link Validation
+
+**Purpose**: Validates project links with Lychee to catch broken references early.
+
+**Triggers**:
+
+- Push to any branch (excluding tags)
+- Pull requests to `main`, `minor`, `fix/**`, `feat/**`, `patch/**`
+- Daily schedule (cron: `0 6 * * *`)
+- Manual trigger
+
+**What it does**:
+
+1. ✈ Checks out the repository
+2. 🔗 Runs `lycheeverse/lychee-action` with retries and private-link exclusions
+3. Fails the job when broken links are detected
+
+**Config files**:
+
+- `.lycheeignore` for ignored URLs/patterns
 
 ---
 

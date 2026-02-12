@@ -1,0 +1,44 @@
+# yaml-language-server: $schema=https://json.schemastore.org/github-workflow.json
+name: Link Checker
+
+on:
+  push:
+    branches:
+      - "**"
+    tags:
+      - "!**"
+  pull_request:
+    branches:
+      - main
+      - minor
+      - fix/**
+      - feat/**
+      - patch/**
+  schedule:
+    - cron: "0 6 * * *"
+  workflow_dispatch:
+
+concurrency:
+  group: ${{ github.workflow }}-${{ github.event.pull_request.number || github.ref || github.run_id }}
+  cancel-in-progress: true
+
+jobs:
+  lychee:
+    name: Check links with lychee
+    runs-on: ubuntu-latest
+    timeout-minutes: 30
+    permissions:
+      contents: read
+    steps:
+      - name: ✈ Checkout repository
+        uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
+
+      - name: 🔗 Check links
+        uses: lycheeverse/lychee-action@a8c4c7c819fc9f3dbad31d24714f96f309877a2f # v2.7.0
+        with:
+          args: >-
+            --no-progress
+            --max-retries 2
+            --retry-wait-time 2
+            --exclude-all-private
+            .
