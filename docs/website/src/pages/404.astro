@@ -1,13 +1,13 @@
 ---
-import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro';
-import { Icon } from '@astrojs/starlight/components';
+import StarlightPage from '@astrojs/starlight/components/StarlightPage.astro'
+import { Icon } from '@astrojs/starlight/components'
 
-const baseUrl = import.meta.env.BASE_URL;
+const baseUrl = import.meta.env.BASE_URL
 
 // Detect locale from pathname (e.g., /starter-gradle/es/...)
-const pathname = Astro.url.pathname;
-const isEs = pathname.includes('/es/');
-const locale = isEs ? 'es' : 'en';
+const pathname = Astro.url.pathname
+const isEs = pathname.includes('/es/')
+const locale = isEs ? 'es' : 'en'
 
 const t = {
   en: {
@@ -26,9 +26,9 @@ const t = {
     gettingStarted: 'Primeros pasos',
     structure: 'Estructura',
   },
-};
+}
 
-const labels = t[locale];
+const labels = t[locale]
 ---
 
 <StarlightPage frontmatter={{ title: labels.title, template: 'splash', editUrl: false }}>
