@@ -1,8 +1,10 @@
 import { defineConfig } from 'astro/config'
 import starlight from '@astrojs/starlight'
+import { viewTransitions } from 'astro-vtbot/starlight-view-transitions'
 
 export default defineConfig({
-  site: 'https://starter-gradle.dallay.com',
+  site: 'https://dallay.github.io',
+  base: '/starter-gradle',
   integrations: [
     starlight({
       title: 'Starter Gradle',
@@ -11,6 +13,46 @@ export default defineConfig({
         en: { label: 'English' },
         es: { label: 'Español', lang: 'es' },
       },
+      plugins: [viewTransitions()],
+      customCss: ['./src/styles/custom.css'],
+      social: [
+        {
+          icon: 'github',
+          label: 'GitHub',
+          href: 'https://github.com/dallay/starter-gradle',
+        },
+      ],
+      head: [
+        {
+          tag: 'meta',
+          attrs: {
+            name: 'theme-color',
+            content: '#0a0f1e',
+          },
+        },
+        {
+          tag: 'meta',
+          attrs: {
+            property: 'og:type',
+            content: 'website',
+          },
+        },
+        {
+          tag: 'meta',
+          attrs: {
+            property: 'og:title',
+            content: 'Starter Gradle — Modern Gradle Template',
+          },
+        },
+        {
+          tag: 'meta',
+          attrs: {
+            property: 'og:description',
+            content:
+              'A centralized, maintainable, and robust Gradle starter template for Kotlin, Java, and Spring Boot projects.',
+          },
+        },
+      ],
       sidebar: [
         {
           label: 'Guides',

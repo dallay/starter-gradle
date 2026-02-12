@@ -13,11 +13,12 @@
     "check": "biome check src astro.config.mjs package.json tsconfig.json"
   },
   "dependencies": {
-    "@astrojs/starlight": "^0.31.0",
-    "astro": "^5.2.3",
+    "@astrojs/starlight": "^0.37.6",
+    "astro": "^5.17.2",
     "sharp": "^0.33.5"
   },
   "devDependencies": {
-    "@biomejs/biome": "^2.3.14"
+    "@biomejs/biome": "^2.3.14",
+    "astro-vtbot": "^2.1.11"
   }
 }
