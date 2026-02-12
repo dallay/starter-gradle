@@ -8,7 +8,7 @@ Esta guía explica cómo publicar releases y snapshots en Maven Central usando G
 
 Antes de poder publicar, asegúrate de tener:
 
-1. **Clave GPG configurada**: Sigue la [Guía de Configuración GPG](../gpg-setup/) para crear y configurar tu clave de firma
+1. **Clave GPG configurada**: Sigue la [Guía de Configuración GPG](./gpg-setup/) para crear y configurar tu clave de firma
 2. **Acceso a Maven Central**: Secrets del repositorio configurados:
    - `SIGNING_IN_MEMORY_KEY`: Tu clave privada GPG
    - `SIGNING_IN_MEMORY_KEY_PASSWORD`: Contraseña de la clave GPG
@@ -42,6 +42,50 @@ Actualiza la versión en los lugares apropiados:
 version = "1.2.3"  // Para releases de patch
 version = "1.3.0"  // Para releases minor
 ```
+
+### Sincronizar la versión desde el tag Git automáticamente
+
+Puedes mantener la versión del proyecto en sincronía con el tag Git automáticamente con el script y el target Make incluidos en este repositorio.
+
+- `make sync-version` — ejecuta `./sync-version-with-tag.sh` y actualiza `gradle.properties` para que `VERSION=` coincida con el último tag Git con formato `vX.Y.Z`.
+- `./sync-version-with-tag.sh` — script que lee el último tag (`git describe --tags --abbrev=0`), extrae la versión numérica (quita la `v` inicial) y reemplaza la línea `VERSION=` en `gradle.properties`.
+
+Flujos de uso (elige uno):
+
+1) Recomendado (actualiza el código primero, luego el tag)
+
+```bash
+# Actualiza los archivos de build y commitea
+# incrementar version en gradle.properties o build.gradle.kts a 0.1.1
+git add gradle.properties
+git commit -m "chore: bump version to 0.1.1"
+
+# Crear un tag anotado que coincida con la version
+git tag -a v0.1.1 -m "Release v0.1.1"
+# Pushear commit y tag
+git push origin main
+git push origin v0.1.1
+```
+
+2) Si creaste el tag primero (causa del fallo en CI), sincroniza el código con el tag localmente y commitea el cambio
+
+```bash
+# Asegúrate de tener el tag localmente (o fetch)
+git fetch --tags
+
+# Sincronizar gradle.properties con el último tag
+make sync-version
+# Revisar y commitear el cambio
+git add gradle.properties
+git commit -m "chore: sync version to $(git describe --tags --abbrev=0 | sed 's/^v//')"
+# Pushear el commit (no es necesario recrear el tag)
+git push origin main
+```
+
+Notas y advertencias:
+- El CI de release exige que el tag Git (ej. `v0.1.1`) coincida con la versión en el código (ej. `0.1.1`). Si no coinciden, el build falla con un error como: "CI Release: GitHub tag (v0.1.1) must match Code version (0.1.0)".
+- Es preferible crear el commit que actualiza la versión antes de crear el tag para evitar desajustes.
+- El script solo reconoce tags que cumplen la expresión `^v[0-9]+\.[0-9]+\.[0-9]+$`.
 
 ### Paso 3: Crear y pushear un tag
 
@@ -127,6 +171,6 @@ Usa este checklist antes de publicar:
 
 ## Ver También
 
-- [Guía de Configuración GPG](../gpg-setup/)
+- [Guía de Configuración GPG](./gpg-setup/)
 - [GitHub Workflows](https://github.com/dallay/starter-gradle/blob/main/.github/workflows/README.md)
 - [Guía de Contribución](https://github.com/dallay/starter-gradle/blob/main/.github/CONTRIBUTING.md)
