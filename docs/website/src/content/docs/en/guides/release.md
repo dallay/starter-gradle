@@ -43,6 +43,50 @@ version = "1.2.3"  // For patch releases
 version = "1.3.0"  // For minor releases
 ```
 
+### Automating version sync from Git tag
+
+You can keep the project version in sync with a Git tag automatically using the helper script and Make target included in this repository.
+
+- `make sync-version` — runs `./sync-version-with-tag.sh` and updates `gradle.properties` so `VERSION=` matches the latest Git tag of the form `vX.Y.Z`.
+- `./sync-version-with-tag.sh` — shell script that reads the latest tag (`git describe --tags --abbrev=0`), extracts the numeric version (drops the leading `v`), and replaces the `VERSION=` line in `gradle.properties`.
+
+Usage patterns (pick one workflow):
+
+1) Recommended (update code first, then tag)
+
+```bash
+# Update build files and commit
+# bump version in gradle.properties or build.gradle.kts to 0.1.1
+git add gradle.properties
+git commit -m "chore: bump version to 0.1.1"
+
+# Create an annotated tag matching the version
+git tag -a v0.1.1 -m "Release v0.1.1"
+# Push commit and tag
+git push origin main
+git push origin v0.1.1
+```
+
+2) If you created the tag first (what caused the CI failure you saw), sync the code to the tag locally and commit the change
+
+```bash
+# Ensure tag exists locally (or fetch it)
+git fetch --tags
+
+# Sync gradle.properties to the latest tag
+make sync-version
+# Review and commit the change
+git add gradle.properties
+git commit -m "chore: sync version to $(git describe --tags --abbrev=0 | sed 's/^v//')"
+# Push the commit (no need to recreate the tag)
+git push origin main
+```
+
+Notes and caveats:
+- The repository’s release CI enforces that the Git tag (e.g. `v0.1.1`) matches the code version (e.g. `0.1.1`). If they don't match the build fails with an error like: "CI Release: GitHub tag (v0.1.1) must match Code version (0.1.0)".
+- Prefer creating the commit that updates the version before creating the tag to avoid mismatches.
+- The script only recognizes tags matching the regex `^v[0-9]+\.[0-9]+\.[0-9]+$`.
+
 ### Step 3: Create and push a tag
 
 ```bash
