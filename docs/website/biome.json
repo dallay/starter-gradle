@@ -21,5 +21,8 @@
   },
   "assist": {
     "enabled": false
+  },
+  "files": {
+    "includes": ["src/**/*.js", "src/**/*.ts", "src/**/*.jsx", "src/**/*.tsx", "src/**/*.astro", "*.json", "*.mjs"]
   }
 }
