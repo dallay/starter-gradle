@@ -1,20 +1,6 @@
 ---
-// This page handles the redirect from root to the default locale
-// respecting the base path configuration
+// This page handles the redirect from the base root to the default locale
+const baseUrl = import.meta.env.BASE_URL
+const destination = baseUrl.endsWith('/') ? `${baseUrl}en/` : `${baseUrl}/en/`
+return Astro.redirect(destination)
 ---
-
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="utf-8" />
-    <meta http-equiv="refresh" content={`0;url=${import.meta.env.BASE_URL}/en/`} />
-    <link rel="canonical" href={`${import.meta.env.BASE_URL}/en/`} />
-    <title>Redirecting…</title>
-  </head>
-  <body>
-    <p>Redirecting to <a href={`${import.meta.env.BASE_URL}/en/`}>{import.meta.env.BASE_URL}/en/</a>.</p>
-    <script is:inline define:vars={{ baseUrl: import.meta.env.BASE_URL }}>
-      window.location.replace(baseUrl + '/en/')
-    </script>
-  </body>
-</html>
