@@ -337,6 +337,7 @@ nav.sidebar a[aria-current="page"] {
 	font-weight: 800;
 	letter-spacing: -0.03em;
 	margin-top: 3rem;
+	margin-bottom: 2.5rem;
 	padding-bottom: 0.75rem;
 	border-bottom: 1px solid var(--glass-border);
 }
