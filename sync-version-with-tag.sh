@@ -72,7 +72,7 @@ update_json_string_key() {
       line = $0
       pattern = "^[[:space:]]*\"" key "\"[[:space:]]*:[[:space:]]*\"[^\"]*\"[[:space:]]*,?[[:space:]]*$"
       if (!updated && line ~ pattern) {
-        sub("\"" key "\"[[:space:]]*:[[:space:]]*\"[^\"]*\"", "\"" key "\": \"" value "\"", line)
+        sub("^([[:space:]]*\"" key "\"[[:space:]]*:[[:space:]]*)\"[^\"]*\"", "\\1\"" value "\"", line)
         updated = 1
       }
       print line
@@ -110,7 +110,7 @@ apply_target_update() {
 }
 
 # Get the globally latest semantic version tag matching vX.Y.Z
-tag=$(git tag --sort=-v:refname | grep -Em1 "$TAG_REGEX" || true)
+tag=$(git tag -l 'v*' --sort=-v:refname | grep -Em1 "$TAG_REGEX" || true)
 if [[ -z "$tag" ]]; then
   echo "ERROR: No tag matching vX.Y.Z was found."
   exit 1
@@ -134,14 +134,14 @@ else
 fi
 
 # Helpful next-steps message
-diff_files=${CHANGED_FILES[*]:-}
+diff_files="${CHANGED_FILES[*]}"
 if [[ ${#CHANGED_FILES[@]} -eq 0 ]]; then
   diff_files="gradle.properties gradle/build-logic/gradle.properties docs/website/package.json"
 fi
 
 cat <<EOF
 Next steps (recommended):
-  1) Review the changes: git diff $diff_files
+  1) Review the changes: git diff "$diff_files"
   2) Commit the change: git add gradle.properties gradle/build-logic/gradle.properties docs/website/package.json && git commit -m "chore: sync version to $version"
   3) Push your branch and tag as appropriate.
      If tag v$version already exists but points at the wrong commit, prefer creating a new patch version.
