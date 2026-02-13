@@ -103,6 +103,13 @@ export default defineConfig({
               },
             },
             {
+              label: 'Template Customization',
+              slug: 'guides/customization',
+              translations: {
+                es: 'Personalización de la Plantilla',
+              },
+            },
+            {
               label: 'Release Process',
               slug: 'guides/release',
               translations: {
