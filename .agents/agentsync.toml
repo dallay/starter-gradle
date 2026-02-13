@@ -124,11 +124,6 @@ destination = ".opencode/command"
 type = "symlink-contents"
 pattern = "*.md"
 
-[agents.opencode.targets.instructions]
-source = "AGENTS.md"
-destination = "OPENCODE.md"
-type = "symlink"
-
 # -----------------------------------------------------------------------------
 # Root AGENTS.md
 # -----------------------------------------------------------------------------
