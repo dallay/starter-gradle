@@ -47,8 +47,11 @@ version = "1.3.0"  // Para releases minor
 
 Puedes mantener la versión del proyecto en sincronía con el tag Git automáticamente con el script y el target Make incluidos en este repositorio.
 
-- `make sync-version` — ejecuta `./sync-version-with-tag.sh` y actualiza `gradle.properties` para que `VERSION=` coincida con el último tag Git con formato `vX.Y.Z`.
-- `./sync-version-with-tag.sh` — script que lee el último tag (`git describe --tags --abbrev=0`), extrae la versión numérica (quita la `v` inicial) y reemplaza la línea `VERSION=` en `gradle.properties`.
+- `make sync-version` — ejecuta `./sync-version-with-tag.sh` y sincroniza la última versión semántica del tag Git (`vX.Y.Z`) en:
+  - `gradle.properties` (`VERSION=`)
+  - `gradle/build-logic/gradle.properties` (`VERSION=`)
+  - `docs/website/package.json` (`"version"`)
+- `./sync-version-with-tag.sh` — script shell que selecciona el tag semántico más reciente global usando `git tag --sort=-v:refname | grep -Em1 '^v[0-9]+\.[0-9]+\.[0-9]+$'` (no el tag más cercano desde `HEAD`), extrae la versión numérica (quita la `v` inicial) y actualiza todos los targets de versión listados arriba.
 
 Flujos de uso (elige uno):
 
@@ -73,11 +76,11 @@ git push origin v0.1.1
 # Asegúrate de tener el tag localmente (o fetch)
 git fetch --tags
 
-# Sincronizar gradle.properties con el último tag
+# Sincronizar los archivos de versión con el último tag
 make sync-version
 # Revisar y commitear el cambio
-git add gradle.properties
-git commit -m "chore: sync version to $(git describe --tags --abbrev=0 | sed 's/^v//')"
+git add gradle.properties gradle/build-logic/gradle.properties docs/website/package.json
+git commit -m "chore: sync version to $(awk -F= '/^VERSION=/{print $2; exit}' gradle.properties)"
 # Pushear el commit (no es necesario recrear el tag)
 git push origin main
 ```
