@@ -165,6 +165,5 @@ build/spotless-prettier-node-modules-*/serve.js
 AGENTS.md
 CLAUDE.md
 GEMINI.md
-OPENCODE.md
 opencode.json
 # END AI Agent Symlinks
