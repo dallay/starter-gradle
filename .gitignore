@@ -159,6 +159,8 @@ build/spotless-prettier-node-modules-*/serve.js
 .gemini/skills/
 .github/copilot-instructions.md
 .mcp.json
+.opencode/command
+.opencode/skill
 .vscode/mcp.json
 AGENTS.md
 CLAUDE.md

@@ -107,11 +107,22 @@ destination = "GEMINI.md"
 type = "symlink"
 
 # -----------------------------------------------------------------------------
-# OpenCode
+# OpenCode AI - Terminal-based AI coding assistant
 # -----------------------------------------------------------------------------
 [agents.opencode]
 enabled = true
 description = "OpenCode - Open source AI coding agent"
+
+[agents.opencode.targets.skills]
+source = "skills"
+destination = ".opencode/skill"
+type = "symlink-contents"
+
+[agents.opencode.targets.commands]
+source = "command"
+destination = ".opencode/command"
+type = "symlink-contents"
+pattern = "*.md"
 
 [agents.opencode.targets.instructions]
 source = "AGENTS.md"

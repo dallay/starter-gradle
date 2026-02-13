@@ -43,10 +43,12 @@ val agentsyncApply =
         commands.firstOrNull { command ->
           val exitCode =
             try {
-              inject.exec.exec {
-                commandLine(command)
-                isIgnoreExitValue = true
-              }.exitValue
+              inject.exec
+                .exec {
+                  commandLine(command)
+                  isIgnoreExitValue = true
+                }
+                .exitValue
             } catch (_: Exception) {
               logger.info("AgentSync command unavailable: ${command.joinToString(" ")}")
               Int.MIN_VALUE
@@ -73,5 +75,5 @@ val agentsyncApply =
     }
   }
 
-// Hook into qualityGate if it exists in the project
-tasks.matching { it.name == "qualityGate" }.configureEach { dependsOn(agentsyncApply) }
+// Run AgentSync as part of the standard verification lifecycle
+tasks.named("check") { dependsOn(agentsyncApply) }
