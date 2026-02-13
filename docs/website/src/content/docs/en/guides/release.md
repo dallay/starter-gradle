@@ -83,7 +83,7 @@ git push origin main
 ```
 
 Notes and caveats:
-- The repository’s release CI enforces that the Git tag (e.g. `v0.1.1`) matches the code version (e.g. `0.1.1`). If they don't match the build fails with an error like: "CI Release: GitHub tag (v0.1.1) must match Code version (0.1.0)".
+- The repository's release CI enforces that the Git tag (e.g. `v0.1.1`) matches the code version (e.g. `0.1.1`). If they don't match the build fails with an error like: "CI Release: GitHub tag (v0.1.1) must match Code version (0.1.1)".
 - Prefer creating the commit that updates the version before creating the tag to avoid mismatches.
 - The script only recognizes tags matching the regex `^v[0-9]+\.[0-9]+\.[0-9]+$`.
 

@@ -83,7 +83,7 @@ git push origin main
 ```
 
 Notas y advertencias:
-- El CI de release exige que el tag Git (ej. `v0.1.1`) coincida con la versión en el código (ej. `0.1.1`). Si no coinciden, el build falla con un error como: "CI Release: GitHub tag (v0.1.1) must match Code version (0.1.0)".
+- El CI de release exige que el tag Git (ej. `v0.1.1`) coincida con la versión en el código (ej. `0.1.1`). Si no coinciden, el build falla con un error como: "CI Release: GitHub tag (v0.1.1) must match Code version (0.1.1)".
 - Es preferible crear el commit que actualiza la versión antes de crear el tag para evitar desajustes.
 - El script solo reconoce tags que cumplen la expresión `^v[0-9]+\.[0-9]+\.[0-9]+$`.
 

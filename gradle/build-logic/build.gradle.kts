@@ -17,6 +17,10 @@ tasks.withType<JavaCompile> { options.release.set(libs.versions.jdk.get().toInt(
 
 description = "Zero-config Gradle plugin for building production-ready standalone JVM apps"
 
+group = providers.gradleProperty("GROUP").get()
+
+version = providers.gradleProperty("VERSION").get()
+
 dependencies {
   // implementation(embeddedKotlin("test-junit5"))
   implementation(embeddedKotlin("gradle-plugin"))
