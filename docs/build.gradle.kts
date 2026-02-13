@@ -12,11 +12,11 @@ val nodeVersion = libs.versions.node.get()
 val nodeDir = isolated.rootProject.projectDirectory.dir(".gradle/nodejs")
 
 node {
-  download = nodeDir.asFile.exists().not()
-  version = nodeVersion
-  distBaseUrl = null
-  workDir = nodeDir
-  nodeProjectDir = file("website")
+  download.set(true)
+  version.set(nodeVersion)
+  distBaseUrl.set(null)
+  workDir.set(nodeDir)
+  nodeProjectDir.set(file("website"))
 }
 
 @Suppress("ConstPropertyName")

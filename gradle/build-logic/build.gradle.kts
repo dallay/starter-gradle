@@ -76,10 +76,20 @@ dependencies {
 }
 
 val projectGroup: String = providers.gradleProperty("GROUP").get()
-val pomDeveloperName: String = providers.gradleProperty("POM_DEVELOPER_NAME").get()
-val pomUrl: String = providers.gradleProperty("POM_URL").get()
-val pomScmConnection: String = providers.gradleProperty("POM_SCM_CONNECTION").get()
-val pomLicenseUrl: String = providers.gradleProperty("POM_LICENSE_URL").get()
+val pomDeveloperName: String = providers.gradleProperty("POM_DEVELOPER_NAME").orElse("dallay").get()
+val pomUrl: String =
+  providers.gradleProperty("POM_URL").orElse("https://github.com/dallay/starter-gradle").get()
+val pomScmConnection: String =
+  providers
+    .gradleProperty("POM_SCM_CONNECTION")
+    .orElse("scm:git:https://github.com/dallay/starter-gradle.git")
+    .get()
+val pomLicenseUrl: String =
+  providers.gradleProperty("POM_LICENSE_URL").orElse("https://mit-license.org").get()
+val pomDeveloperEmail: String = "${pomDeveloperName}@users.noreply.github.com"
+val pomDeveloperOrganization: String = "profiletailors"
+val pomDeveloperOrganizationUrl: String = pomUrl
+val pomLicenseName: String = "MIT"
 
 val catalogLibs
   get(): VersionCatalog = extensions.getByType<VersionCatalogsExtension>().named("libs")
@@ -152,6 +162,35 @@ gradlePlugin {
     }
   }
   if (printPlugins) println("|----------publish plugins----------")
+}
+
+mavenPublishing {
+  pom {
+    name.set("${project.group}:${project.name}")
+    description.set(project.description)
+    url.set(pomUrl)
+    licenses {
+      license {
+        name.set(pomLicenseName)
+        url.set(pomLicenseUrl)
+        distribution.set("repo")
+      }
+    }
+    developers {
+      developer {
+        id.set(pomDeveloperName)
+        name.set(pomDeveloperName)
+        email.set(pomDeveloperEmail)
+        organization.set(pomDeveloperOrganization)
+        organizationUrl.set(pomDeveloperOrganizationUrl)
+      }
+    }
+    scm {
+      connection.set(pomScmConnection)
+      developerConnection.set(pomScmConnection)
+      url.set(pomUrl)
+    }
+  }
 }
 
 buildscript {
