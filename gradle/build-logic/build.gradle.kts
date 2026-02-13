@@ -1,5 +1,6 @@
 @file:Suppress("UnstableApiUsage", "detekt:MaxLineLength")
 
+import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
 import org.gradle.kotlin.dsl.support.uppercaseFirstChar
 
 plugins {
@@ -171,6 +172,18 @@ tasks {
   }
   javadoc { isFailOnError = false }
   test { useJUnitPlatform() }
+}
+
+tasks.withType<PublishToMavenRepository>().configureEach {
+  val isPluginMarkerPublication = name.contains("PluginMarkerMavenPublication")
+  val isMavenCentralRepository = name.endsWith("ToMavenCentralRepository")
+  if (isPluginMarkerPublication && isMavenCentralRepository) {
+    // Plugin marker POMs are generated automatically for Gradle plugin resolution.
+    // They are useful in the Plugin Portal flow, but repeatedly fail Maven Central
+    // validation in this project. Keep publishing only the main plugin artifact
+    // to Maven Central and skip marker publications there.
+    enabled = false
+  }
 }
 
 // Note: Code quality plugins (dokka, detekt, spotless) were removed

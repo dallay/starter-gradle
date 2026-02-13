@@ -83,7 +83,11 @@ jobs:
           ORG_GRADLE_PROJECT_mavenCentralPassword: ${{ secrets.MAVEN_CENTRAL_PASSWORD }}
         run: |
           if [ "${GITHUB_REPOSITORY}" = "dallay/starter-gradle" ]; then
-            ./gradlew :build-logic:publishToMavenCentral publishToMavenCentral
+            if [ "${{ inputs.release }}" = "true" ]; then
+              ./gradlew :build-logic:publishPluginMavenPublicationToMavenCentralRepository publishToMavenCentral
+            else
+              ./gradlew publishToMavenCentral
+            fi
           else
             ./gradlew publishToMavenCentral
           fi
