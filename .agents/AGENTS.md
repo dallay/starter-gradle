@@ -128,7 +128,7 @@ testImplementation(libs.junit.jupiter)
 Located in `.agents/skills/`. Reference for detailed patterns:
 
 | Skill                                              | Description                               | Trigger                          |
-|----------------------------------------------------|-------------------------------------------|----------------------------------|
+| -------------------------------------------------- | ----------------------------------------- | -------------------------------- |
 | [gradle](.agents/skills/gradle/SKILL.md)           | Gradle best practices, custom tasks       | `build.gradle.kts`, build config |
 | [kotlin](.agents/skills/kotlin/SKILL.md)           | Kotlin conventions, null safety           | `.kt` files                      |
 | [c4-diagrams](.agents/skills/c4-diagrams/SKILL.md) | C4 architecture diagrams                  | `docs/architecture/diagrams`     |
