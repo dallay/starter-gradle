@@ -1,7 +1,7 @@
 @file:Suppress("UnstableApiUsage", "detekt:MaxLineLength")
 
-import org.gradle.kotlin.dsl.support.uppercaseFirstChar
 import org.gradle.api.publish.maven.tasks.PublishToMavenRepository
+import org.gradle.kotlin.dsl.support.uppercaseFirstChar
 
 plugins {
   `kotlin-dsl` // https://plugins.gradle.org/plugin/org.gradle.kotlin.kotlin-dsl
