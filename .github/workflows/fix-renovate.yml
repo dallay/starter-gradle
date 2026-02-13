@@ -67,18 +67,7 @@ jobs:
         with:
           fetch-depth: 0
           repository: ${{ steps.get-pr-data.outputs.head_repo }}
-          ref: ${{ steps.get-pr-data.outputs.head_sha }}
-
-      - name: 🔍 Verify checked-out commit
-        run: |
-          EXPECTED_SHA="${{ steps.get-pr-data.outputs.head_sha }}"
-          ACTUAL_SHA="$(git rev-parse HEAD)"
-          echo "Expected SHA: ${EXPECTED_SHA}"
-          echo "Actual SHA:   ${ACTUAL_SHA}"
-          if [[ "${ACTUAL_SHA}" != "${EXPECTED_SHA}" ]]; then
-            echo "Checked-out commit does not match expected PR SHA."
-            exit 1
-          fi
+          ref: ${{ steps.get-pr-data.outputs.head_branch }}
 
       - name: 📦 Setup Node
         uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
@@ -127,12 +116,11 @@ jobs:
           git add -A
 
           git diff --cached --quiet || git commit -m "${COMMIT_MSG}"
-          git push
+          git push origin ${{ steps.get-pr-data.outputs.head_branch }}
 
-      - name: 💬 Add reaction to PR
+      - name: 💬 Add reaction to trigger comment
         uses: peter-evans/create-or-update-comment@e8674b075228eee787fea43ef493e45ece1004c9 # v5.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
-          comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
+          comment-id: ${{ github.event.comment.id }}
           reactions: hooray
