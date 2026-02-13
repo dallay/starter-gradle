@@ -3,8 +3,8 @@ set -e
 
 echo "🚀 Pre-push check start"
 
-# Check if pnpm is available (handles both interactive and non-interactive shells)
-if command -v pnpm >/dev/null 2>&1 || /bin/sh -lc 'command -v pnpm' >/dev/null 2>&1; then
+# Check if pnpm is available in the current PATH
+if command -v pnpm >/dev/null 2>&1; then
     echo "✅ pnpm found, running full check..."
     ./gradlew check
 else
@@ -16,9 +16,4 @@ else
     ./gradlew check -x :docs:pnpmInstall -x :docs:websiteCheck -x :docs:fileContentCheck
 fi
 
-if [ $? -eq 0 ]; then
-    echo "✅ Pre-push check passed"
-else
-    echo "❌ Pre-push check failed"
-    exit 1
-fi
+echo "✅ Pre-push check passed"
