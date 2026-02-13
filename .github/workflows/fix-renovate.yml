@@ -62,12 +62,12 @@ jobs:
           echo "The PR commit is ${{ steps.get-pr-data.outputs.head_sha }}"
           echo "The repository is ${{ steps.get-pr-data.outputs.head_repo }}"
 
-      - name: ✈ Checkout base branch
+      - name: ✈ Checkout PR branch
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           fetch-depth: 0
-          repository: ${{ github.repository }}
-          ref: ${{ github.event.issue.pull_request.base.ref }}
+          repository: ${{ steps.get-pr-data.outputs.head_repo }}
+          ref: ${{ steps.get-pr-data.outputs.head_branch }}
 
       - name: 📦 Setup Node
         uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
@@ -116,12 +116,11 @@ jobs:
           git add -A
 
           git diff --cached --quiet || git commit -m "${COMMIT_MSG}"
-          git push
+          git push origin ${{ steps.get-pr-data.outputs.head_branch }}
 
-      - name: 💬 Add reaction to PR
+      - name: 💬 Add reaction to trigger comment
         uses: peter-evans/create-or-update-comment@e8674b075228eee787fea43ef493e45ece1004c9 # v5.0.0
         with:
           token: ${{ secrets.GITHUB_TOKEN }}
-          repository: ${{ github.event.client_payload.github.payload.repository.full_name }}
-          comment-id: ${{ github.event.client_payload.github.payload.comment.id }}
+          comment-id: ${{ github.event.comment.id }}
           reactions: hooray
