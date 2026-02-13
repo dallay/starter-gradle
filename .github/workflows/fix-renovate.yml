@@ -53,11 +53,13 @@ jobs:
             }
             core.setOutput('head_repo', prInfo.repo)
             core.setOutput('head_branch', prInfo.branchName)
+            core.setOutput('head_sha', prInfo.commit)
             core.setOutput('committer', prInfo.committer)
 
       - name: 📡 Use PR Branch
         run: |
           echo "The PR branch is ${{ steps.get-pr-data.outputs.head_branch }}"
+          echo "The PR commit is ${{ steps.get-pr-data.outputs.head_sha }}"
           echo "The repository is ${{ steps.get-pr-data.outputs.head_repo }}"
 
       - name: ✈ Checkout PR branch
@@ -65,7 +67,7 @@ jobs:
         with:
           fetch-depth: 0
           repository: ${{ steps.get-pr-data.outputs.head_repo }}
-          ref: ${{ steps.get-pr-data.outputs.head_branch }}
+          ref: ${{ steps.get-pr-data.outputs.head_sha }}
 
       - name: 📦 Setup Node
         uses: actions/setup-node@395ad3262231945c25e8478fd5baf05154b1d79f # v6.1.0
