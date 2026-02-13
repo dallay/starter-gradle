@@ -1,6 +1,7 @@
 # Agent Instructions
 
-Gradle-based multi-module project in Kotlin. Emphasizes centralized build configurations, custom plugins, and version catalogs.
+Gradle-based multi-module project in Kotlin. Emphasizes centralized build configurations, custom
+plugins, and version catalogs.
 
 ## Quick Commands
 
@@ -37,6 +38,7 @@ make info               # Project info
 ## Code Style
 
 ### Formatting (.editorconfig)
+
 - **Indent**: 2 spaces (no tabs)
 - **Max line**: 100 characters
 - **Trailing commas**: Required
@@ -48,9 +50,9 @@ make info               # Project info
 ```kotlin
 // Data classes with value classes
 data class User(
-    val id: UserId,
-    val name: String,
-    val createdAt: Instant = Instant.now(),
+  val id: UserId,
+  val name: String,
+  val createdAt: Instant = Instant.now(),
 )
 
 @JvmInline
@@ -58,8 +60,8 @@ value class UserId(val value: UUID)
 
 // Sealed types for results
 sealed interface Result<out T> {
-    data class Success<T>(val data: T) : Result<T>
-    data class Failure(val error: Throwable) : Result<Nothing>
+  data class Success<T>(val data: T) : Result<T>
+  data class Failure(val error: Throwable) : Result<Nothing>
 }
 
 // Null safety - NO !! operator
@@ -71,6 +73,7 @@ fun double(x: Int): Int = x * 2
 ```
 
 ### Naming
+
 - **Classes**: PascalCase (`UserService`)
 - **Functions**: camelCase (`findById`)
 - **Constants**: UPPER_SNAKE_CASE (`MAX_RETRY`)
@@ -78,10 +81,11 @@ fun double(x: Int): Int = x * 2
 - **Booleans**: `is`/`has` prefix (`isActive`)
 
 ### Error Handling
+
 ```kotlin
 // Result for recoverable
 fun find(id: UUID): Result<User> = runCatching {
-    repo.find(id) ?: throw NotFoundException(id)
+  repo.find(id) ?: throw NotFoundException(id)
 }
 
 // Sealed exceptions
@@ -92,6 +96,7 @@ class NotFoundException(id: UUID) : DomainError("Not found: $id")
 ## Gradle Guidelines
 
 ### Best Practices
+
 - Use `tasks.register` not `create` (lazy)
 - Use `configureEach` not `all`
 - Never use `afterEvaluate`
@@ -99,6 +104,7 @@ class NotFoundException(id: UUID) : DomainError("Not found: $id")
 - Annotate task inputs/outputs for caching
 
 ### Dependencies
+
 ```kotlin
 // Version catalog
 implementation(libs.slf4j.api)
@@ -121,27 +127,29 @@ testImplementation(libs.junit.jupiter)
 
 Located in `.agents/skills/`. Reference for detailed patterns:
 
-| Skill | Description | Trigger |
-|-------|-------------|---------|
-| [gradle](.agents/skills/gradle/SKILL.md) | Gradle best practices, custom tasks | `build.gradle.kts`, build config |
-| [kotlin](.agents/skills/kotlin/SKILL.md) | Kotlin conventions, null safety | `.kt` files |
-| [c4-diagrams](.agents/skills/c4-diagrams/SKILL.md) | C4 architecture diagrams | `docs/architecture/diagrams` |
-| [pr-creator](.agents/skills/pr-creator/SKILL.md) | PR creation workflow | Creating PRs |
-| [pinned-tag](.agents/skills/pinned-tag/SKILL.md) | Pin GitHub Actions | CI security |
+| Skill                                              | Description                               | Trigger                          |
+|----------------------------------------------------|-------------------------------------------|----------------------------------|
+| [gradle](.agents/skills/gradle/SKILL.md)           | Gradle best practices, custom tasks       | `build.gradle.kts`, build config |
+| [kotlin](.agents/skills/kotlin/SKILL.md)           | Kotlin conventions, null safety           | `.kt` files                      |
+| [c4-diagrams](.agents/skills/c4-diagrams/SKILL.md) | C4 architecture diagrams                  | `docs/architecture/diagrams`     |
+| [pr-creator](.agents/skills/pr-creator/SKILL.md)   | PR creation workflow                      | Creating PRs                     |
+| [pinned-tag](.agents/skills/pinned-tag/SKILL.md)   | Pin GitHub Actions                        | CI security                      |
+| [release](.agents/skills/release/SKILL.md)         | Release process, Maven Central publishing | Creating releases                |
 
 ## Testing
 
 ```kotlin
 class ServiceTest {
-    @Test
-    fun `should return result`() {
-        val result = service.action()
-        assertEquals(expected, result)
-    }
+  @Test
+  fun `should return result`() {
+    val result = service.action()
+    assertEquals(expected, result)
+  }
 }
 ```
 
 Run specific test:
+
 ```bash
 ./gradlew :app:test --tests "com.profiletailors.app.ApplicationTest.testMain"
 ```
