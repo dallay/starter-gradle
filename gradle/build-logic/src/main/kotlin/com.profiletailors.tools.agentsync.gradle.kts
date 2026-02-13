@@ -32,13 +32,42 @@ val agentsyncApply =
         return@doLast
       }
 
-      try {
-        inject.exec.exec { commandLine("agentsync", "apply") }
-        println("✓ AI agents synchronized successfully")
-      } catch (e: Exception) {
+      val commands =
+        listOf(
+          listOf("agentsync", "apply"),
+          listOf("npx", "@dallay/agentsync", "apply"),
+          listOf("pnpm", "dlx", "@dallay/agentsync", "apply"),
+        )
+
+      val successfulCommand =
+        commands.firstOrNull { command ->
+          val exitCode =
+            try {
+              inject.exec.exec {
+                commandLine(command)
+                isIgnoreExitValue = true
+              }.exitValue
+            } catch (_: Exception) {
+              logger.info("AgentSync command unavailable: ${command.joinToString(" ")}")
+              Int.MIN_VALUE
+            }
+
+          val succeeded = exitCode == 0
+          if (!succeeded && exitCode != Int.MIN_VALUE) {
+            logger.info(
+              "AgentSync command failed (${command.joinToString(" ")}), exit code: $exitCode"
+            )
+          }
+          succeeded
+        }
+
+      if (successfulCommand != null) {
+        println("✓ AI agents synchronized successfully (${successfulCommand.joinToString(" ")})")
+      } else {
         // We print a message instead of failing the build to make it optional
         println(
-          "⚠️ AgentSync not found or failed. Visit https://dallay.github.io/agentsync/ to install it."
+          "⚠️ AgentSync no está disponible. Intenté: agentsync, npx y pnpm dlx. " +
+            "Visita https://dallay.github.io/agentsync/ para instalarlo."
         )
       }
     }
