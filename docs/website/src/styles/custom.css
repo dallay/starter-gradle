@@ -1,57 +1,3 @@
-/* ─────────────────────────────────────────────
-   Starter Gradle — Custom Starlight Theme
-   Modern dark design with gradient accents
-   ───────────────────────────────────────────── */
-
-/* ── Google Fonts ── */
-@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap");
-
-/* ── Root Theme Tokens ── */
-:root {
-	/* Primary palette — teal to indigo gradient */
-	--sl-color-accent-low: #0d2847;
-	--sl-color-accent: #38bdf8;
-	--sl-color-accent-high: #bae6fd;
-
-	/* Typography */
-	--sl-font:
-		"Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", system-ui,
-		sans-serif;
-	--sl-font-mono:
-		"JetBrains Mono", ui-monospace, SFMono-Regular, Consolas, monospace;
-
-	/* Sizing */
-	--sl-content-width: 75rem;
-	--sl-text-h1: clamp(2rem, 4vw, 3rem);
-	--sl-text-h2: clamp(1.5rem, 3vw, 2rem);
-	--sl-text-h3: clamp(1.15rem, 2vw, 1.5rem);
-
-	/* Custom tokens */
-	--gradient-brand: linear-gradient(
-		135deg,
-		#38bdf8 0%,
-		#818cf8 50%,
-		#c084fc 100%
-	);
-	--gradient-brand-subtle: linear-gradient(
-		135deg,
-		rgba(56, 189, 248, 0.15) 0%,
-		rgba(129, 140, 248, 0.15) 50%,
-		rgba(192, 132, 252, 0.15) 100%
-	);
-	--gradient-hero: linear-gradient(
-		160deg,
-		#0c1222 0%,
-		#0f172a 40%,
-		#1a1044 100%
-	);
-	--glass-bg: rgba(15, 23, 42, 0.6);
-	--glass-border: rgba(56, 189, 248, 0.12);
-	--glass-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
-	--card-glow: 0 0 40px rgba(56, 189, 248, 0.06);
-}
-
-/* Dark theme overrides */
 :root[data-theme="dark"] {
 	--sl-color-bg: #0a0f1e;
 	--sl-color-bg-nav: rgba(10, 15, 30, 0.85);
@@ -500,8 +446,31 @@ summary {
 	transition-timing-function: ease;
 }
 
+/* ── Heading & Code Fixes ── */
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6) {
+	overflow-wrap: anywhere;
+}
+
+.sl-markdown-content :is(h1, h2, h3, h4, h5, h6) code {
+	white-space: normal;
+	padding: 0.1em 0.3em !important;
+	font-size: 0.9em;
+}
+
+[data-theme="dark"] .sl-markdown-content :is(h1, h2, h3, h4, h5, h6) code {
+	/* Ensure the heading's gradient text is visible through the code block */
+	background: rgba(56, 189, 248, 0.1) !important;
+	border-color: rgba(56, 189, 248, 0.2) !important;
+}
+
 /* ── Responsive Touch-ups ── */
 @media (max-width: 50rem) {
+	.sl-markdown-content h2 {
+		font-size: 1.5rem !important;
+		margin-top: 2rem;
+		margin-bottom: 1.5rem;
+	}
+
 	.hero {
 		padding: 2.5rem 0 !important;
 	}
