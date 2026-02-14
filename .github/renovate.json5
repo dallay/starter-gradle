@@ -4,7 +4,7 @@
     "config:best-practices",
     ":semanticCommitTypeAll(deps)",
     ":semanticCommitScopeDisabled",
-    // Eliminado schedule:weekly para usar cron personalizado
+    // Removed schedule:weekly to use a custom cron
     "group:allNonMajor",
     "helpers:pinGitHubActionDigests",
   ],
@@ -22,14 +22,14 @@
   labels: ["type|dependency-upgrade", "pr|deps"],
   ignorePaths: ["**/__tests__/**"],
 
-  // --- CONFIGURACIÓN DE TIEMPO Y ESTABILIDAD ---
-  // Hora UTC (ajustar según tu zona horaria si es necesario)
+  // --- TIME AND STABILITY CONFIGURATION ---
+  // UTC time (adjust to your timezone if needed)
   timezone: "UTC",
-  // Cron: Cualquier minuto, Horas 22-23 y 0-7, Cada 3 días del mes (1, 4, 7...)
+  // Cron: Any minute, Hours 22-23 and 0-7, every 3rd day of the month (1, 4, 7...)
   schedule: ["* 22-23,0-7 */3 * *"],
-  // Estabilidad: Esperar 3 días antes de crear PRs
+  // Stability: Wait 3 days before creating PRs
   minimumReleaseAge: "3 days",
-  
+
   pinDigests: true,
   ignoreUnstable: false,
   dependencyDashboard: true,
@@ -46,8 +46,8 @@
     {
       description: "Automerge GitHub Actions (minor/patch/digest)",
       matchManagers: ["github-actions"],
-      // Incluimos 'digest' porque helpers:pinGitHubActionDigests convierte updates en digest changes
-      matchUpdateTypes: ["minor", "patch", "digest"], 
+      // Include 'digest' because helpers:pinGitHubActionDigests converts updates into digest changes
+      matchUpdateTypes: ["minor", "patch", "digest"],
       automerge: true,
     },
     {
@@ -73,7 +73,7 @@
       allowedVersions: "!/(-snapshot|-Snapshot|-SNAPSHOT)/",
     },
 
-    // --- MANTENIMIENTO ---
+    // --- MAINTENANCE ---
     {
       matchManagers: ["npm", "pnpm"],
       matchFileNames: ["docs/website/**"],
@@ -82,7 +82,7 @@
       },
     },
 
-    // --- AGRUPACIONES ---
+    // --- GROUPINGS ---
     {
       matchPackageNames: ["org.gradlex.**"],
       groupName: "gradlex",
@@ -102,7 +102,7 @@
       customType: "regex",
       description: "Update gradle version in toml",
       managerFilePatterns: ["\\.versions\\.toml$"],
-      matchStrings: ['(^|\\n)\\s*gradle\\s*=\\s*"(?<currentValue>[^"]*)"'],
+      matchStrings: ['(^|\\n)\\s*gradle\\s*=\\s*"(?<currentValue>[^\"]*)"'],
       depNameTemplate: "gradle",
       datasourceTemplate: "gradle-version",
     },
@@ -110,7 +110,7 @@
       customType: "regex",
       description: "Update node version in toml",
       managerFilePatterns: ["\\.versions\\.toml$"],
-      matchStrings: ['(^|\\n)\\s*node\\s*=\\s*"(?<currentValue>[^"]*)"'],
+      matchStrings: ['(^|\\n)\\s*node\\s*=\\s*"(?<currentValue>[^\"]*)"'],
       depNameTemplate: "node",
       datasourceTemplate: "node-version",
     },
@@ -118,7 +118,7 @@
       customType: "regex",
       description: "Update kotlin stdlib version in toml",
       managerFilePatterns: ["\\.versions\\.toml$"],
-      matchStrings: ['(^|\\n)\\s*kotlin\\s*=\\s*"(?<currentValue>[^"]*)"'],
+      matchStrings: ['(^|\\n)\\s*kotlin\\s*=\\s*"(?<currentValue>[^\"]*)"'],
       depNameTemplate: "org.jetbrains.kotlin:kotlin-stdlib",
       datasourceTemplate: "maven",
     },
@@ -126,7 +126,7 @@
       customType: "regex",
       description: "Update jdk version in toml",
       managerFilePatterns: ["\\.versions\\.toml$"],
-      matchStrings: ['(^|\\n)\\s*jdk\\s*=\\s*"(?<currentValue>[^"]*)"'],
+      matchStrings: ['(^|\\n)\\s*jdk\\s*=\\s*"(?<currentValue>[^\"]*)"'],
       depNameTemplate: "java",
       datasourceTemplate: "java-version",
     },
