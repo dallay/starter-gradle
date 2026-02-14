@@ -4,7 +4,6 @@
     "config:best-practices",
     ":semanticCommitTypeAll(deps)",
     ":semanticCommitScopeDisabled",
-    // Removed schedule:weekly to use a custom cron
     "group:allNonMajor",
     "helpers:pinGitHubActionDigests",
   ],
