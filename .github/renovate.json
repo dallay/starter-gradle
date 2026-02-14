@@ -10,18 +10,14 @@
     "helpers:pinGitHubActionDigests",
     "schedule:monthly"
   ],
-  "reviewers": [
-    "yacosta738"
-  ],
+  "reviewers": ["yacosta738"],
   "timezone": "America/Havana",
   "schedule": [
     "after 10pm every weekday",
     "before 5am every weekday",
     "every weekend"
   ],
-  "automergeSchedule": [
-    "before 4am on the first day of the month"
-  ],
+  "automergeSchedule": ["before 4am on the first day of the month"],
   "prConcurrentLimit": 5,
   "prHourlyLimit": 2,
   "branchConcurrentLimit": 5,
@@ -36,42 +32,24 @@
   "separateMultipleMajor": true,
   "ignoreUnstable": true,
   "pinDigests": true,
-  "labels": [
-    "dependencies"
-  ],
-  "addLabels": [
-    "renovate"
-  ],
-  "postUpdateOptions": [
-    "npmDedupe",
-    "pnpmDedupe"
-  ],
+  "labels": ["dependencies"],
+  "addLabels": ["renovate"],
+  "postUpdateOptions": ["npmDedupe", "pnpmDedupe"],
   "lockFileMaintenance": {
     "enabled": true,
-    "schedule": [
-      "before 5am on the first day of the month"
-    ]
+    "schedule": ["before 5am on the first day of the month"]
   },
   "vulnerabilityAlerts": {
     "enabled": true,
-    "labels": [
-      "security"
-    ],
-    "assignees": [
-      "yacosta738"
-    ],
+    "labels": ["security"],
+    "assignees": ["yacosta738"],
     "automerge": false,
     "osvVulnerabilityAlerts": true
   },
   "packageRules": [
     {
       "description": "Automerge non-breaking updates for stable versions",
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "pin",
-        "digest"
-      ],
+      "matchUpdateTypes": ["minor", "patch", "pin", "digest"],
       "matchCurrentVersion": "!/^0/",
       "automerge": true,
       "automergeType": "pr",
@@ -80,30 +58,17 @@
     },
     {
       "description": "Kotlin ecosystem - batch updates",
-      "extends": [
-        "monorepo:kotlin"
-      ],
+      "extends": ["monorepo:kotlin"],
       "groupName": "Kotlin monorepo",
-      "matchUpdateTypes": [
-        "digest",
-        "patch",
-        "minor",
-        "major"
-      ],
-      "schedule": [
-        "before 5am on the first day of the month"
-      ],
+      "matchUpdateTypes": ["digest", "patch", "minor", "major"],
+      "schedule": ["before 5am on the first day of the month"],
       "minimumReleaseAge": "3 days",
       "prPriority": 2
     },
     {
       "description": "Gradle wrapper - cautious updates with lockfile refresh",
-      "matchPackageNames": [
-        "gradle"
-      ],
-      "matchManagers": [
-        "gradle-wrapper"
-      ],
+      "matchPackageNames": ["gradle"],
+      "matchManagers": ["gradle-wrapper"],
       "groupName": "Gradle wrapper",
       "minimumReleaseAge": "7 days",
       "automerge": false,
@@ -115,14 +80,8 @@
     {
       "description": "Spring Boot ecosystem - manual review required",
       "groupName": "Spring Boot",
-      "matchPackageNames": [
-        "org.springframework.boot:{/,}**"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch",
-        "major"
-      ],
+      "matchPackageNames": ["org.springframework.boot:{/,}**"],
+      "matchUpdateTypes": ["minor", "patch", "major"],
       "semanticCommitType": "fix",
       "automerge": false,
       "minimumReleaseAge": "5 days",
@@ -131,13 +90,8 @@
     {
       "description": "Spring Framework - manual review required",
       "groupName": "Spring Framework",
-      "matchPackageNames": [
-        "org.springframework:{/,}**"
-      ],
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
+      "matchPackageNames": ["org.springframework:{/,}**"],
+      "matchUpdateTypes": ["minor", "patch"],
       "semanticCommitType": "fix",
       "automerge": false,
       "minimumReleaseAge": "5 days"
@@ -145,40 +99,24 @@
     {
       "description": "Astro ecosystem",
       "groupName": "Astro ecosystem",
-      "matchPackageNames": [
-        "astro",
-        "@astrojs/**",
-        "sharp",
-        "astro-vtbot"
-      ],
-      "matchFileNames": [
-        "docs/website/package.json"
-      ],
+      "matchPackageNames": ["astro", "@astrojs/**", "sharp", "astro-vtbot"],
+      "matchFileNames": ["docs/website/package.json"],
       "semanticCommitType": "chore",
       "minimumReleaseAge": "2 days"
     },
     {
       "description": "Biome - fast updates",
-      "matchPackageNames": [
-        "@biomejs/biome"
-      ],
+      "matchPackageNames": ["@biomejs/biome"],
       "groupName": "Biome tooling",
       "semanticCommitType": "chore",
       "automerge": true,
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ]
+      "matchUpdateTypes": ["minor", "patch"]
     },
     {
       "description": "GitHub Actions - monthly batch",
-      "matchManagers": [
-        "github-actions"
-      ],
+      "matchManagers": ["github-actions"],
       "groupName": "GitHub Actions",
-      "schedule": [
-        "before 5am on the first day of the month"
-      ],
+      "schedule": ["before 5am on the first day of the month"],
       "automerge": true,
       "semanticCommitType": "ci",
       "pinDigests": true,
@@ -187,66 +125,42 @@
     },
     {
       "description": "Docker images - manual review",
-      "matchDatasources": [
-        "docker"
-      ],
+      "matchDatasources": ["docker"],
       "groupName": "Docker images",
-      "schedule": [
-        "before 5am on the first day of the month"
-      ],
+      "schedule": ["before 5am on the first day of the month"],
       "automerge": false,
       "semanticCommitType": "chore"
     },
     {
       "description": "Gradle plugins from version catalog",
-      "matchManagers": [
-        "gradle"
-      ],
-      "matchDepTypes": [
-        "plugin"
-      ],
+      "matchManagers": ["gradle"],
+      "matchDepTypes": ["plugin"],
       "groupName": "Gradle plugins",
       "minimumReleaseAge": "3 days"
     },
     {
       "description": "Major updates - delay for stability",
-      "matchUpdateTypes": [
-        "major"
-      ],
+      "matchUpdateTypes": ["major"],
       "minimumReleaseAge": "3 days",
       "automerge": false,
       "prPriority": -1,
-      "addLabels": [
-        "major-update"
-      ]
+      "addLabels": ["major-update"]
     },
     {
       "description": "GitHub Actions major - extended delay",
-      "matchManagers": [
-        "github-actions"
-      ],
-      "matchUpdateTypes": [
-        "major"
-      ],
+      "matchManagers": ["github-actions"],
+      "matchUpdateTypes": ["major"],
       "automerge": false,
       "minimumReleaseAge": "7 days",
-      "addLabels": [
-        "major-update",
-        "github-actions"
-      ]
+      "addLabels": ["major-update", "github-actions"]
     },
     {
       "description": "0.x versions - treat as major",
       "matchCurrentVersion": "/^0\\./",
-      "matchUpdateTypes": [
-        "minor",
-        "patch"
-      ],
+      "matchUpdateTypes": ["minor", "patch"],
       "automerge": false,
       "minimumReleaseAge": "5 days",
-      "addLabels": [
-        "unstable-dependency"
-      ]
+      "addLabels": ["unstable-dependency"]
     }
   ],
   "customManagers": [
@@ -254,9 +168,7 @@
       "description": "Gradle version catalog - libraries",
       "customType": "regex",
       "fileFormat": "toml",
-      "managerFilePatterns": [
-        "/^gradle/libs\\.versions\\.toml$/"
-      ],
+      "managerFilePatterns": ["/^gradle/libs\\.versions\\.toml$/"],
       "matchStrings": [
         "(?<depName>[^\\s]+)\\s*=\\s*\\{\\s*module\\s*=\\s*\"(?<packageName>[^\"]+)\"\\s*,\\s*version\\s*=\\s*\"(?<currentValue>[^\"]+)\"\\s*\\}"
       ],
@@ -267,9 +179,7 @@
       "description": "Gradle version catalog - plugins",
       "customType": "regex",
       "fileFormat": "toml",
-      "managerFilePatterns": [
-        "/^gradle/libs\\.versions\\.toml$/"
-      ],
+      "managerFilePatterns": ["/^gradle/libs\\.versions\\.toml$/"],
       "matchStrings": [
         "(?<depName>[^\\s]+)\\s*=\\s*\\{\\s*id\\s*=\\s*\"(?<packageName>[^\"]+)\"\\s*(?:,\\s*version\\s*=\\s*\"(?<currentValue>[^\"]+)\")?\\s*\\}"
       ],
