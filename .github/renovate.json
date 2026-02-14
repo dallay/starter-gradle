@@ -333,7 +333,6 @@
       "/(^|/)versions.props$/",
       "/(^|/)versions.lock$/"
     ],
-    "timeout": 600,
     "versioning": "gradle"
   },
   "branchConcurrentLimit": null,
@@ -370,7 +369,6 @@
   },
   "conan": {
     "managerFilePatterns": ["/(^|/)conanfile\\.(txt|py)$/"],
-    "datasource": "conan",
     "versioning": "conan"
   },
   "automergeType": "branch",
@@ -582,7 +580,6 @@
   "branchPrefixOld": "renovate/",
   "ignoreDeps": [],
   "prBodyColumns": [],
-  "commitMessage": "{{{commitMessagePrefix}}} {{{commitMessageAction}}} {{{commitMessageTopic}}} {{{commitMessageExtra}}} {{{commitMessageSuffix}}}",
   "cpanfile": {
     "managerFilePatterns": ["/(^|/)cpanfile$/"]
   },
@@ -622,10 +619,8 @@
   "bbAutoResolvePrTasks": false,
   "reviewersSampleSize": null,
   "jsonnet-bundler": {
-    "managerFilePatterns": ["/(^|/)jsonnetfile\\.json$/"],
-    "datasource": "git-tags"
+    "managerFilePatterns": ["/(^|/)jsonnetfile\\.json$/"]
   },
-  "prTitle": null,
   "composer": {
     "managerFilePatterns": ["/(^|/)([\\w-]*)composer\\.json$/"],
     "versioning": "composer"
@@ -852,7 +847,6 @@
   },
   "cloneSubmodulesFilter": [],
   "maxMajorIncrement": 500,
-  "branchName": "{{{branchPrefix}}}{{{additionalBranchPrefix}}}{{{branchTopic}}}",
   "userStrings": {
     "ignoreTopic": "Renovate Ignore Notification",
     "ignoreMajor": "Because you closed this PR without merging, Renovate will ignore this update. You will not get PRs for *any* future `{{{newMajor}}}.x` releases. But if you manually upgrade to `{{{newMajor}}}.x` then Renovate will re-enable `minor` and `patch` updates automatically.",
