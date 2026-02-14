@@ -94,13 +94,16 @@ jobs:
             --location \
             --output "$dest/detekt.zip"
           unzip -q "$dest/detekt.zip" -d "$dest"
-          echo "$dest" >> "$GITHUB_PATH"
+          # The zip extracts to detekt-cli-VERSION/bin/detekt-cli
+          # Convert v1.23.8 to 1.23.8 for the directory name
+          version="${DETEKT_RELEASE_TAG#v}"
+          echo "$dest/detekt-cli-$version/bin" >> "$GITHUB_PATH"
 
       # Performs static analysis using Detekt
       - name: Run Detekt
         continue-on-error: true
         run: |
-          "${{ github.workspace }}/detekt" --input "${{ github.workspace }}" --report sarif:"${{ github.workspace }}/detekt.sarif.json"
+          detekt-cli --input "${{ github.workspace }}" --report sarif:"${{ github.workspace }}/detekt.sarif.json"
 
       # Modifies the SARIF output produced by Detekt so that absolute URIs are relative
       # This is so we can easily map results onto their source files
@@ -119,7 +122,7 @@ jobs:
           )" > "${{ github.workspace }}/detekt.sarif.json"
 
       # Uploads results to GitHub repository using the upload-sarif action
-      - uses: github/codeql-action/upload-sarif@v3
+      - uses: github/codeql-action/upload-sarif@v4
         with:
           # Path to SARIF file relative to the root of the repository
           sarif_file: ${{ github.workspace }}/detekt.sarif.json
