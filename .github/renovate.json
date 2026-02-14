@@ -168,7 +168,7 @@
       "description": "Gradle version catalog - libraries",
       "customType": "regex",
       "fileFormat": "toml",
-      "fileMatch": ["^gradle/libs\\.versions\\.toml$"],
+      "managerFilePatterns": ["/^gradle/libs\\.versions\\.toml$/"],
       "matchStrings": [
         "(?<depName>[^\\s]+)\\s*=\\s*\\{\\s*module\\s*=\\s*\"(?<packageName>[^\"]+)\"\\s*,\\s*version\\s*=\\s*\"(?<currentValue>[^\"]+)\"\\s*\\}"
       ],
@@ -179,7 +179,7 @@
       "description": "Gradle version catalog - plugins",
       "customType": "regex",
       "fileFormat": "toml",
-      "fileMatch": ["^gradle/libs\\.versions\\.toml$"],
+      "managerFilePatterns": ["/^gradle/libs\\.versions\\.toml$/"],
       "matchStrings": [
         "(?<depName>[^\\s]+)\\s*=\\s*\\{\\s*id\\s*=\\s*\"(?<packageName>[^\"]+)\"\\s*(?:,\\s*version\\s*=\\s*\"(?<currentValue>[^\"]+)\")?\\s*\\}"
       ],
