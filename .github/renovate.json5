@@ -85,7 +85,7 @@
       customType: "regex",
       managerFilePatterns: ["gradle/**/InternalDependencies\\.kt"],
       matchStrings: [
-        '[a-zA-Z0-9_]+\\s*=\\s*\\{(?=[^}]*module\\s*=\\s*"(?<depName>[^" ]+)")(?=[^}]*version\\s*=\\s*"(?<currentValue>[^" ]+)")(?=[^}]*type\\s*=\\s*"(?<datasource>[^" ]+)")[^}]*\\}',
+        '[a-zA-Z0-9_]+\\s*=\\s*\\{\\s*module\\s*=\\s*"(?<depName>[^" ]+)"\\s*,\\s*version\\s*=\\s*"(?<currentValue>[^" ]+)"\\s*,\\s*type\\s*=\\s*"(?<datasource>[^" ]+)"[^}]*\\}',
       ],
     },
   ],
