@@ -4,12 +4,10 @@
     "config:best-practices",
     ":semanticCommitTypeAll(deps)",
     ":semanticCommitScopeDisabled",
-    "schedule:weekly",
+    // Eliminado schedule:weekly para usar cron personalizado
     "group:allNonMajor",
-    // Importante: pinea los digestos de GitHub Actions a versiones específicas
     "helpers:pinGitHubActionDigests",
   ],
-  // Habilitar explícitamente el manager de GitHub Actions
   enabledManagers: [
     "github-actions",
     "gradle",
@@ -17,29 +15,39 @@
     "npm",
     "pnpm",
     "maven",
+    "regex",
   ],
   semanticCommitType: "deps",
   semanticCommitScope: "",
   labels: ["type|dependency-upgrade", "pr|deps"],
-  // Ignorar solo directorios de tests, no workflows de GitHub
   ignorePaths: ["**/__tests__/**"],
+
+  // --- CONFIGURACIÓN DE TIEMPO Y ESTABILIDAD ---
+  // Hora UTC (ajustar según tu zona horaria si es necesario)
+  timezone: "UTC",
+  // Cron: Cualquier minuto, Horas 22-23 y 0-7, Cada 3 días del mes (1, 4, 7...)
+  schedule: ["* 22-23,0-7 */3 * *"],
+  // Estabilidad: Esperar 3 días antes de crear PRs
+  minimumReleaseAge: "3 days",
+  
   pinDigests: true,
   ignoreUnstable: false,
-  minimumReleaseAge: "7 days",
   dependencyDashboard: true,
   vulnerabilityAlerts: {
     enabled: true,
   },
   osvVulnerabilityAlerts: true,
-  // Automerge para updates menores y parches (no majors)
+
   automerge: true,
   automergeStrategy: "squash",
+
   packageRules: [
-    // Reglas para GitHub Actions - importante para actualizar actions
+    // --- GITHUB ACTIONS ---
     {
-      description: "Automerge GitHub Actions minor/patch updates",
+      description: "Automerge GitHub Actions (minor/patch/digest)",
       matchManagers: ["github-actions"],
-      matchUpdateTypes: ["minor", "patch"],
+      // Incluimos 'digest' porque helpers:pinGitHubActionDigests convierte updates en digest changes
+      matchUpdateTypes: ["minor", "patch", "digest"], 
       automerge: true,
     },
     {
@@ -49,8 +57,10 @@
       groupName: "GitHub Actions (major)",
       automerge: false,
     },
-    // Reglas para archivos de version libs
+
+    // --- GRADLE / LIBS ---
     {
+      description: "Filtrar versiones inestables en catalogos",
       matchFileNames: ["**/rcLibs.versions.toml"],
       allowedVersions: "!/(-M|-m|-beta|-Beta|-BETA|-alpha|-Alpha|-ALPHA|-snapshot|-Snapshot|-SNAPSHOT)/",
     },
@@ -62,7 +72,8 @@
       matchFileNames: ["**/alphaLibs.versions.toml"],
       allowedVersions: "!/(-snapshot|-Snapshot|-SNAPSHOT)/",
     },
-    // Mantenimiento de lock files para docs
+
+    // --- MANTENIMIENTO ---
     {
       matchManagers: ["npm", "pnpm"],
       matchFileNames: ["docs/website/**"],
@@ -70,7 +81,8 @@
         enabled: true,
       },
     },
-    // Agrupaciones de paquetes específicos
+
+    // --- AGRUPACIONES ---
     {
       matchPackageNames: ["org.gradlex.**"],
       groupName: "gradlex",
@@ -84,37 +96,43 @@
       groupName: "spring boot",
     },
   ],
+
   customManagers: [
     {
       customType: "regex",
+      description: "Update gradle version in toml",
       managerFilePatterns: ["\\.versions\\.toml$"],
-      matchStrings: ['(^|\\n)gradle *= *"(?<currentValue>[^"]*)"'],
+      matchStrings: ['(^|\\n)\\s*gradle\\s*=\\s*"(?<currentValue>[^"]*)"'],
       depNameTemplate: "gradle",
       datasourceTemplate: "gradle-version",
     },
     {
       customType: "regex",
+      description: "Update node version in toml",
       managerFilePatterns: ["\\.versions\\.toml$"],
-      matchStrings: ['(^|\\n)node *= *"(?<currentValue>[^"]*)"'],
+      matchStrings: ['(^|\\n)\\s*node\\s*=\\s*"(?<currentValue>[^"]*)"'],
       depNameTemplate: "node",
       datasourceTemplate: "node-version",
     },
     {
       customType: "regex",
+      description: "Update kotlin stdlib version in toml",
       managerFilePatterns: ["\\.versions\\.toml$"],
-      matchStrings: ['(^|\\n)kotlin *= *"(?<currentValue>[^"]*)"'],
+      matchStrings: ['(^|\\n)\\s*kotlin\\s*=\\s*"(?<currentValue>[^"]*)"'],
       depNameTemplate: "org.jetbrains.kotlin:kotlin-stdlib",
       datasourceTemplate: "maven",
     },
     {
       customType: "regex",
+      description: "Update jdk version in toml",
       managerFilePatterns: ["\\.versions\\.toml$"],
-      matchStrings: ['(^|\\n)jdk *= *"(?<currentValue>[^"]*)"'],
+      matchStrings: ['(^|\\n)\\s*jdk\\s*=\\s*"(?<currentValue>[^"]*)"'],
       depNameTemplate: "java",
       datasourceTemplate: "java-version",
     },
     {
       customType: "regex",
+      description: "Update InternalDependencies.kt",
       managerFilePatterns: ["gradle/**/InternalDependencies\\.kt"],
       matchStrings: [
         '[a-zA-Z0-9_]+\\s*=\\s*\\{\\s*module\\s*=\\s*"(?<depName>[^" ]+)"\\s*,\\s*version\\s*=\\s*"(?<currentValue>[^" ]+)"\\s*,\\s*type\\s*=\\s*"(?<datasource>[^" ]+)"[^}]*\\}',
