@@ -20,7 +20,7 @@ DevSecOps toolchain:
 - code-coverage
   - [Jacoco](https://github.com/jacoco/jacoco), [kover](https://github.com/Kotlin/kotlinx-kover/issues/746)
 - CI/CD(Continuous Integration/Continuous Deployment)
-  - [Jenkins](https://www.jenkins.io/), [GitHub Actions](https://github.com/features/actions), [Travis](https://www.travis-ci.com)
+  - [Jenkins](https://www.jenkins.io/), [GitHub Actions](https://github.com/features/actions)
 - Tracing, Logging, Reporting, Monitoring, Automation...
 - DevSecOps
   - ([CodeQL](https://codeql.github.com/), [Mend](https://www.mend.io/)), ([Codecov](https://about.codecov.io/)), ([Codacy](https://www.codacy.com/), [SonarQube](https://www.sonarsource.com/), [Qodana](https://www.jetbrains.com/qodana/))
@@ -75,7 +75,7 @@ Check plugins are not necessarily needed to build a working software.
 
 _Report_ plugins add reporting functionality to discover potential issues with the software or the build setup.
 They may generate data that is picked up and displayed by external tools like
-[Develocity](https://scans.gradle.com/) or [Dependency Track](https://dependencytrack.org/).
+[Develocity](https://gradle.com/scans/gradle/) or [Dependency Track](https://dependencytrack.org/).
 More reporting tools may be integrated in this category.
 Report plugins are not necessarily needed to build a working software.
 
@@ -138,8 +138,8 @@ And if you add custom tasks and advanced logic, you can add tests for that.
 
 - `build.yaml` Configure GitHub to run builds and produce reports (
   👉[inspect](https://github.com/jjohannes/gradle-project-setup-howto/actions/workflows/build.yaml)). Integrates with:
-  - [Develocity Build Scans](https://scans.gradle.com/) (👉[inspect](https://scans.gradle.com/s/h3odwhbjjd2qm))
-  - [Gradle Remote Build Cache](https://docs.gradle.com/develocity/build-cache-node/)
+  - [Develocity Build Scans](https://gradle.com/scans/gradle/) (👉[inspect](https://scans.gradle.com/s/h3odwhbjjd2qm))
+  - [Gradle Remote Build Cache](https://docs.gradle.com/develocity/bcn/current/)
   - [Reposilite](https://reposilite.com/) (👉[inspect](https://repo.onepiece.software/#/snapshots))
   - [Dependency Track](https://dependencytrack.org/)
 - `dependabot.yml` Configure [Dependabot](https://github.com/dependabot) to automatically get

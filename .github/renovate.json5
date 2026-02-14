@@ -15,6 +15,10 @@
   ignoreUnstable: false,
   minimumReleaseAge: "7 days",
   dependencyDashboard: true,
+  vulnerabilityAlerts: {
+    enabled: true,
+  },
+  osvVulnerabilityAlerts: true,
   packageRules: [
     {
       matchFileNames: ["**/rcLibs.versions.toml"],
@@ -31,41 +35,58 @@
     {
       matchManagers: ["npm", "pnpm"],
       matchFileNames: ["docs/website/**"],
-      lockFileMaintenance: { enabled: true },
+      lockFileMaintenance: {
+        enabled: true,
+      },
+    },
+    {
+      matchPackageNames: ["org.gradlex.**"],
+      groupName: "gradlex",
+    },
+    {
+      matchPackageNames: ["org.jetbrains.kotlin.**"],
+      groupName: "kotlin",
+    },
+    {
+      matchPackageNames: ["org.springframework.boot.**"],
+      groupName: "spring boot",
     },
   ],
   customManagers: [
     {
       customType: "regex",
-      managerFilePatterns: ["\\.versions.toml$"],
-      matchStrings: ['(^|\n)(?<depName>gradle) *= *"(?<currentValue>.*)"'],
+      managerFilePatterns: ["\\.versions\\.toml$"],
+      matchStrings: ['(^|\\n)gradle *= *"(?<currentValue>[^"]*)"'],
       depNameTemplate: "gradle",
       datasourceTemplate: "gradle-version",
     },
     {
       customType: "regex",
-      managerFilePatterns: ["\\.versions.toml$"],
-      matchStrings: ['(^|\n)(?<depName>node) *= *"(?<currentValue>.*)"'],
+      managerFilePatterns: ["\\.versions\\.toml$"],
+      matchStrings: ['(^|\\n)node *= *"(?<currentValue>[^"]*)"'],
       depNameTemplate: "node",
       datasourceTemplate: "node-version",
     },
     {
       customType: "regex",
-      managerFilePatterns: ["gradle/**/InternalDependencies\\.kt"],
-      matchStrings: [
-        '(?<enumName>[a-zA-Z0-9_]+)\\s*=\\s*\\{[^}]*module\\s*=\\s*\"(?<depName>[^\"]+)\"[^}]*version\\s*=\\s*\"(?<currentValue>[^\"]+)\"[^}]*type\\s*=\\s*\"maven\"[^}]*\\}',
-      ],
-      depNameTemplate: "{{{depName}}}",
+      managerFilePatterns: ["\\.versions\\.toml$"],
+      matchStrings: ['(^|\\n)kotlin *= *"(?<currentValue>[^"]*)"'],
+      depNameTemplate: "org.jetbrains.kotlin:kotlin-stdlib",
       datasourceTemplate: "maven",
+    },
+    {
+      customType: "regex",
+      managerFilePatterns: ["\\.versions\\.toml$"],
+      matchStrings: ['(^|\\n)jdk *= *"(?<currentValue>[^"]*)"'],
+      depNameTemplate: "java",
+      datasourceTemplate: "java-version",
     },
     {
       customType: "regex",
       managerFilePatterns: ["gradle/**/InternalDependencies\\.kt"],
       matchStrings: [
-        '(?<enumName>[a-zA-Z0-9_]+)\\s*=\\s*\\{[^}]*module\\s*=\\s*\"(?<depName>[^\"]+)\"[^}]*version\\s*=\\s*\"(?<currentValue>[^\"]+)\"[^}]*type\\s*=\\s*\"npm\"[^}]*\\}',
+        '[a-zA-Z0-9_]+\\s*=\\s*\\{(?=[^}]*module\\s*=\\s*"(?<depName>[^" ]+)")(?=[^}]*version\\s*=\\s*"(?<currentValue>[^" ]+)")(?=[^}]*type\\s*=\\s*"(?<datasource>[^" ]+)")[^}]*\\}',
       ],
-      depNameTemplate: "{{{depName}}}",
-      datasourceTemplate: "npm",
     },
   ],
 }

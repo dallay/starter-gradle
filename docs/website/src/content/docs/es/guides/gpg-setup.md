@@ -230,7 +230,7 @@ gpg --keyserver keyserver.ubuntu.com --send-keys TU_ID_DE_CLAVE
 ## Referencias
 
 - [Maven Central: GPG Signing Requirements](https://central.sonatype.org/publish/requirements/gpg/)
-- [GitHub: Encrypted secrets](https://docs.github.com/en/actions/security-guides/encrypted-secrets)
+- [GitHub: Usar secretos en workflows](https://docs.github.com/en/actions/how-tos/write-workflows/choose-what-workflows-do/use-secrets)
 - [GnuPG Documentation](https://gnupg.org/documentation/)
 
 
