@@ -40,15 +40,15 @@
       },
     },
     {
-      matchPackageNames: ["org.gradlex**"],
+      matchPackageNames: ["org.gradlex.**"],
       groupName: "gradlex",
     },
     {
-      matchPackageNames: ["org.jetbrains.kotlin**"],
+      matchPackageNames: ["org.jetbrains.kotlin.**"],
       groupName: "kotlin",
     },
     {
-      matchPackageNames: ["org.springframework.boot**"],
+      matchPackageNames: ["org.springframework.boot.**"],
       groupName: "spring boot",
     },
   ],
