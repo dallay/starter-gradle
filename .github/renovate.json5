@@ -6,11 +6,23 @@
     ":semanticCommitScopeDisabled",
     "schedule:weekly",
     "group:allNonMajor",
+    // Importante: pinea los digestos de GitHub Actions a versiones específicas
+    "helpers:pinGitHubActionDigests",
+  ],
+  // Habilitar explícitamente el manager de GitHub Actions
+  enabledManagers: [
+    "github-actions",
+    "gradle",
+    "gradle-wrapper",
+    "npm",
+    "pnpm",
+    "maven",
   ],
   semanticCommitType: "deps",
   semanticCommitScope: "",
   labels: ["type|dependency-upgrade", "pr|deps"],
-  ignorePaths: ["**/__tests__/**", "docs/**", "!docs/website/**"],
+  // Ignorar solo directorios de tests, no workflows de GitHub
+  ignorePaths: ["**/__tests__/**"],
   pinDigests: true,
   ignoreUnstable: false,
   minimumReleaseAge: "7 days",
@@ -19,7 +31,25 @@
     enabled: true,
   },
   osvVulnerabilityAlerts: true,
+  // Automerge para updates menores y parches (no majors)
+  automerge: true,
+  automergeStrategy: "squash",
   packageRules: [
+    // Reglas para GitHub Actions - importante para actualizar actions
+    {
+      description: "Automerge GitHub Actions minor/patch updates",
+      matchManagers: ["github-actions"],
+      matchUpdateTypes: ["minor", "patch"],
+      automerge: true,
+    },
+    {
+      description: "Group major GitHub Actions updates",
+      matchManagers: ["github-actions"],
+      matchUpdateTypes: ["major"],
+      groupName: "GitHub Actions (major)",
+      automerge: false,
+    },
+    // Reglas para archivos de version libs
     {
       matchFileNames: ["**/rcLibs.versions.toml"],
       allowedVersions: "!/(-M|-m|-beta|-Beta|-BETA|-alpha|-Alpha|-ALPHA|-snapshot|-Snapshot|-SNAPSHOT)/",
@@ -32,6 +62,7 @@
       matchFileNames: ["**/alphaLibs.versions.toml"],
       allowedVersions: "!/(-snapshot|-Snapshot|-SNAPSHOT)/",
     },
+    // Mantenimiento de lock files para docs
     {
       matchManagers: ["npm", "pnpm"],
       matchFileNames: ["docs/website/**"],
@@ -39,6 +70,7 @@
         enabled: true,
       },
     },
+    // Agrupaciones de paquetes específicos
     {
       matchPackageNames: ["org.gradlex.**"],
       groupName: "gradlex",
