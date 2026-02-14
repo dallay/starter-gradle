@@ -67,12 +67,12 @@ jobs:
           echo "The PR commit is ${{ steps.get-pr-data.outputs.head_sha }}"
           echo "The repository is ${{ steps.get-pr-data.outputs.head_repo }}"
 
-      - name: ✈ Checkout PR branch
+      - name: ✈ Checkout PR commit
         uses: actions/checkout@8e8c483db84b4bee98b60c0593521ed34d9990e8 # v6.0.1
         with:
           fetch-depth: 0
           repository: ${{ steps.get-pr-data.outputs.head_repo }}
-          ref: ${{ steps.get-pr-data.outputs.head_branch }}
+          ref: ${{ steps.get-pr-data.outputs.head_sha }}
 
       - name: 🔍 Verify checked-out commit
         run: |
