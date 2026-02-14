@@ -42,6 +42,10 @@ jobs:
     # The type of runner that the job will run on
     runs-on: ubuntu-latest
 
+    # Required for upload-sarif to push security events
+    permissions:
+      security-events: write
+
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
       # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
@@ -100,7 +104,10 @@ jobs:
 
       # Modifies the SARIF output produced by Detekt so that absolute URIs are relative
       # This is so we can easily map results onto their source files
-      # This can be removed once relative URI support lands in Detekt: https://git.io/JLBbA
+      # NOTE: Detekt v1.23.8 still outputs absolute URIs in SARIF (no native --base-path support)
+      # The jq transformation strips the absolute workspace path to produce relative paths
+      # This can be removed if Detekt adds native relative URI support in a future release
+      # See: https://git.io/JLBbA
       - name: Make artifact location URIs relative
         continue-on-error: true
         run: |
