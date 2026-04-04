@@ -234,9 +234,9 @@ configurations.configureEach { resolutionStrategy { force("org.projectlombok:lom
 
 dependencies {
   testImplementation("org.jetbrains.kotlin:kotlin-test")
-  testImplementation("org.junit.jupiter:junit-jupiter-api:5.10.0")
-  testImplementation("org.junit.jupiter:junit-jupiter-params:5.10.0")
-  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.10.0")
+  testImplementation("org.junit.jupiter:junit-jupiter-api:5.14.3")
+  testImplementation("org.junit.jupiter:junit-jupiter-params:5.14.3")
+  testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.14.3")
 }
 
 dependencies {
