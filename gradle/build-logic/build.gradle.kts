@@ -230,7 +230,7 @@ tasks.withType<PublishToMavenRepository>().configureEach {
 // use convention plugins defined within itself.
 
 // TODO remove it
-configurations.configureEach { resolutionStrategy { force("org.projectlombok:lombok:1.18.42") } }
+configurations.configureEach { resolutionStrategy { force("org.projectlombok:lombok:1.18.46") } }
 
 dependencies {
   testImplementation("org.jetbrains.kotlin:kotlin-test")
